@@ -8,5 +8,10 @@ module.exports.notificationService = () => {
             //const user = await User.findOne({ _id: ObjectId(req.userId) })
             return await NotificationModel.find({'companies': ObjectId(req.headers['company']) })
         },
+        async getA() {
+            console.log(`class=NotificationService, m=get`)
+            //const user = await User.findOne({ _id: ObjectId(req.userId) })
+            return await NotificationModel.find({})
+        },        
     } 
 }

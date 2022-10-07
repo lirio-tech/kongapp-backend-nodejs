@@ -13,9 +13,9 @@ Create the file `.env` with all the `enviroment variables`
 
 > npm install && npm run build
 
-Sem base dir e 
+Sem base dir e sem o publish directory
 
-![image](https://user-images.githubusercontent.com/3913593/101977611-590ab180-3c2d-11eb-8203-9d2ae9c84af1.png)
+![image](https://user-images.githubusercontent.com/114695511/194653265-b75fbfb7-eadb-4f93-b0a7-ab90abe83e40.png)
    
 
 ### API
