@@ -13,7 +13,8 @@ const rateUsRouter = require('./routes/rateus');
 const analyticsRouter = require('./routes/analytics');
 const schedulesRouter = require('./routes/schedules');
 const paymentsHistoricRouter = require('./routes/paymentsHistoric');
-const addressRouter   = require('./routes/address') 
+const addressRouter = require('./routes/address') 
+const notificationRouter = require('./notification/notificationRoute') 
 const scriptRouter = require('./routes/scriptRouter');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -50,6 +51,7 @@ app.use(`/.netlify/functions/api/analytics`, analyticsRouter);
 app.use(`/.netlify/functions/api/schedules`, schedulesRouter);
 app.use(`/.netlify/functions/api/payments-historic`, paymentsHistoricRouter);
 app.use(`/.netlify/functions/api/address`, addressRouter);
+app.use(`/.netlify/functions/api/notifications`, notificationRouter);
 
 app.use(`/.netlify/functions/api/script`, scriptRouter);
 
