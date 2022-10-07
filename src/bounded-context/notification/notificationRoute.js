@@ -1,4 +1,4 @@
-const authorization = require('../middleware/auth-middleware');
+const authorization = require('../../middleware/auth-middleware');
 const notificationService = require('./notificationService').notificationService();
 const router = require('express').Router();
 

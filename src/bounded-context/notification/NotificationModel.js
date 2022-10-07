@@ -42,6 +42,10 @@ const notificationSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'companies'
   },    
+  onlyAdmin: {
+    type: Boolean,
+    default: true,     
+  },      
 });
 notificationSchema.set('timestamps', true);
 module.exports = mongoose.model('notifications', notificationSchema);

@@ -9,6 +9,7 @@ const companyService = require('../services/CompanyService.js').companyService()
 const dateUtils = require('../utils/dateUtils').dateUtils();
 const userService = require('../services/UserService').userService();
 const CompanySite = require('../models/CompanySite');
+const notificationService = require('../bounded-context/notification/notificationService').notificationService();
 const messageLabels = require('../services/validation/Message').messageLabels();
 
 const SUNDAY = 0;
@@ -724,6 +725,8 @@ router.post('/site', async (req, res) => {
         createdBy: req.body.customer.name
       } 
       const schedule = await new Schedule(scheduleNew).save();  
+      await notificationService.saveSchedule(schedule); // TODO Kafka Producer
+
       res.status(200).json(schedule);
     } catch (error) {
       console.error('schedules :: post', error);
