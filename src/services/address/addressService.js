@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 const CompanySite = require('../../models/CompanySite.js');
 const googleMapsClient = require('@google/maps').createClient({key: process.env.GOOGLE_MAPS_API_KEY});
 
-const POSITION_STACK_API = 'http://api.positionstack.com/v1/forward?access_key=e8b98ba624e7ea8e16d7dab077dd88b1&query='
+const POSITION_STACK_API = `http://api.positionstack.com/v1/forward?access_key=${process.env.POSITION_STACK_API_KEY}&query=`
 const ADDRESS_HOST_API = 'https://viacep.com.br'
 
 module.exports.addressService = () => {
