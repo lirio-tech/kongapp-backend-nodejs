@@ -21,13 +21,13 @@ router.get('', authorization(), async (req, res, next) => {
             title: listModel[i].title,
             description: listModel[i].description,
             type: listModel[i].type,
+            view: listModel[i].view,
             mdi: listModel[i].mdi,
             emojiIcon: listModel[i].emojiIcon,
             path: listModel[i].path,
             hyperLink: listModel[i].hyperLink,
             company: listModel[i].company,
-            createdAt: dateUtils.dateToStringPtBR(listModel[i].createdAt).substring(0,10),
-            updatedAt: dateUtils.dateToStringPtBR(listModel[i].updatedAt).substring(0,10)
+            createdAt: dateUtils.dateToStringPtBR(listModel[i].createdAt).substring(0,5),
           }
           list.push(notif);
 
@@ -58,6 +58,17 @@ router.get('/a', async (req, res, next) => {
       res.status(200).json(notifications); 
     } catch (error) {
       console.error(`/notifications get`, error);
+      res.status(500).send(error);
+    }    
+});
+
+router.patch('/:_id', async (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");  
+  try {
+      await notificationService.updateReadNotification(req.params._id, req.headers['company']);
+      res.status(204); 
+    } catch (error) {
+      console.error(`/notifications patch`, error);
       res.status(500).send(error);
     }    
 });

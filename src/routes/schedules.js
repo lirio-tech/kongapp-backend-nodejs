@@ -725,7 +725,7 @@ router.post('/site', async (req, res) => {
         createdBy: req.body.customer.name
       } 
       const schedule = await new Schedule(scheduleNew).save();  
-      notificationService.saveSchedule(schedule); // TODO Kafka Producer
+      notificationService.saveNewSchedule(schedule); // TODO Kafka Producer
 
       res.status(200).json(schedule);
     } catch (error) {

@@ -22,6 +22,12 @@ const notificationSchema = new mongoose.Schema({
     enum: ['NEW_SCHEDULE', 'SIGNATURE_EXPIRATION', 'WARNING'],
     required: true
   }, 
+  view: {
+    type: String,
+    enum: ['HOME', 'LIST'],
+    required: true,
+    default: 'LIST',
+  },   
   mdi: {
     type: String,
     max: 100,
