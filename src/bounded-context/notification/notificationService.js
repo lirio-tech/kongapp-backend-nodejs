@@ -25,7 +25,7 @@ module.exports.notificationService = () => {
         },
         async saveNewSchedule(schedule) {
             const dtTimeBR = dateUtils.dateToStringPtBR(schedule.dateTimeStartAt);
-            const scheduleDate = dtTimeBR.substring(0, 10);
+            const scheduleDate = dtTimeBR.substring(0, 5);
             const scheduleTime = dtTimeBR.substring(11, 16);
             const notification = {
                 title: "Novo Agendamento",
