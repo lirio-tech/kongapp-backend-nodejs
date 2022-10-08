@@ -1,28 +1,48 @@
 const authorization = require('../../middleware/auth-middleware');
+const dateUtils = require('../../utils/dateUtils').dateUtils();
 const notificationService = require('./notificationService').notificationService();
 const router = require('express').Router();
 
 router.get('', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
-      const list = await notificationService.get(req);
+      const listModel = await notificationService.get(req);
 
+      let list = [];
       let notRead = 0;
       let read = 0;
-      for(let i in list) {
-          if(list[i].isNotRead) {
-            notRead++;
+
+      for(let i in listModel) {
+          
+          let notif = {
+            isNotRead: listModel[i].isNotRead,
+            onlyAdmin: listModel[i].onlyAdmin,
+            _id: listModel[i]._id,
+            title: listModel[i].title,
+            description: listModel[i].description,
+            type: listModel[i].type,
+            mdi: listModel[i].mdi,
+            emojiIcon: listModel[i].emojiIcon,
+            path: listModel[i].path,
+            hyperLink: listModel[i].hyperLink,
+            company: listModel[i].company,
+            createdAt: dateUtils.dateToStringPtBR(listModel[i].createdAt),
+            updatedAt: dateUtils.dateToStringPtBR(listModel[i].updatedAt)
+          }
+          list.push(notif);
+
+          if(listModel[i].isNotRead) {
+              notRead++;
           } else {
-            read++;
+              read++;
           }
       }
 
-      let notifications = {
+      const notifications = {
           list: list,
           amountNotRead: notRead,
           amountRead: read
       }            
-
 
       res.status(200).json(notifications); 
     } catch (error) {

@@ -5,7 +5,7 @@ module.exports.notificationService = () => {
     return {             
         async get(req) {
             console.log(`class=NotificationService, m=get, userId=${req.headers['company']}`)
-            return await NotificationModel.find({'companies': ObjectId(req.headers['company']) })
+            return await NotificationModel.find({'company': ObjectId(req.headers['company']) })
         },
         async getA() {
             console.log(`class=NotificationService, m=get`)
@@ -17,15 +17,15 @@ module.exports.notificationService = () => {
                 title: "Novo Agendamento",
                 description: `${schedule.customer.name} realizou um novo Agendamento, clica aqui para realizar a confirmação.`,
                 isNotRead: true,     
-                type: 'NEW_SCHEDULE',
+                type: 'NEW_SCHEDULE', 
                 mdi: "mdi-clock",
                 emojiIcon: "",
-                path: `/admin/agendamentos/?_id=${schedule._id}&date=${schedule.dateTimeStartAt}`,
+                path: `/admin/agendamentos/?_id=${schedule._id}&date=${schedule.createdAt}`,
                 hyperLink: "",
                 company: schedule.companyId,
                 onlyAdmin: true
             }
-            await NotificationModel.save(notification);
+            await NotificationModel(notification).save();
         } 
     } 
 }
