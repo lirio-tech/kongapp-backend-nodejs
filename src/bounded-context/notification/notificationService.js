@@ -1,4 +1,5 @@
 const { ObjectId } = require('mongodb');
+const dateUtils = require('../../utils/dateUtils').dateUtils();
 const NotificationModel = require('./NotificationModel');
 
 module.exports.notificationService = () => {
@@ -20,7 +21,7 @@ module.exports.notificationService = () => {
                 type: 'NEW_SCHEDULE', 
                 mdi: "mdi-clock",
                 emojiIcon: "",
-                path: `/admin/agendamentos/?_id=${schedule._id}&date=${schedule.createdAt}`,
+                path: `/admin/agendamentos/?_id=${schedule._id}&date=${ dateUtils.dateToStringEnUS(schedule.createdAt)}`,
                 hyperLink: "",
                 company: schedule.companyId,
                 onlyAdmin: true

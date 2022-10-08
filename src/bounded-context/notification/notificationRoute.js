@@ -26,8 +26,8 @@ router.get('', authorization(), async (req, res, next) => {
             path: listModel[i].path,
             hyperLink: listModel[i].hyperLink,
             company: listModel[i].company,
-            createdAt: dateUtils.dateToStringPtBR(listModel[i].createdAt),
-            updatedAt: dateUtils.dateToStringPtBR(listModel[i].updatedAt)
+            createdAt: dateUtils.dateToStringPtBR(listModel[i].createdAt).substring(0,10),
+            updatedAt: dateUtils.dateToStringPtBR(listModel[i].updatedAt).substring(0,10)
           }
           list.push(notif);
 
