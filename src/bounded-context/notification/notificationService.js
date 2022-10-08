@@ -16,7 +16,7 @@ module.exports.notificationService = () => {
         async saveSchedule(schedule) {
             const notification = {
                 title: "Novo Agendamento",
-                description: `${schedule.customer.name} realizou um novo Agendamento para o dia ${dateUtils.dateToStringPtBR(schedule.dateTimeStartAt).substrung(0,16)}, clica aqui para realizar a confirmação.`,
+                description: `${schedule.customer.name} realizou um novo Agendamento para o dia ${dateUtils.dateToStringPtBR(schedule.dateTimeStartAt).substring(0, 16)}, clica aqui para realizar a confirmação.`,
                 isNotRead: true,     
                 type: 'NEW_SCHEDULE', 
                 mdi: "mdi-clock",
