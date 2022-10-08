@@ -26,7 +26,7 @@ module.exports.notificationService = () => {
         async saveNewSchedule(schedule) {
             const dtTimeBR = dateUtils.dateToStringPtBR(schedule.dateTimeStartAt);
             const scheduleDate = dtTimeBR.substring(0, 10);
-            const scheduleTime = dtTimeBR.substring(11, 5);
+            const scheduleTime = dtTimeBR.substring(11, 16);
             const notification = {
                 title: "Novo Agendamento",
                 description: `${schedule.customer.name} realizou um novo Agendamento para o dia ${scheduleDate} às ${scheduleTime}, clica aqui para realizar a confirmação.`,

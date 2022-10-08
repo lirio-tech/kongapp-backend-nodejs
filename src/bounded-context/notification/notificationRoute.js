@@ -13,7 +13,7 @@ router.get('', authorization(), async (req, res, next) => {
       let read = 0;
 
       for(let i in listModel) {
-          
+          const createdAtBR = dateUtils.dateToStringPtBR(listModel[i].createdAt)
           let notif = {
             isNotRead: listModel[i].isNotRead,
             onlyAdmin: listModel[i].onlyAdmin,
@@ -27,7 +27,7 @@ router.get('', authorization(), async (req, res, next) => {
             path: listModel[i].path,
             hyperLink: listModel[i].hyperLink,
             company: listModel[i].company,
-            createdAt: dateUtils.dateToStringPtBR(listModel[i].createdAt).substring(0,5),
+            createdAt: `${createdAtBR.substring(0,5)} ${createdAtBR.substring(11,16)}`
           }
           list.push(notif);
 
