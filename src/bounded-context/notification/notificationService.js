@@ -19,7 +19,8 @@ module.exports.notificationService = () => {
                     company: ObjectId(companyId)
                 },
                 {
-                    isNotRead: false
+                    isNotRead: false,
+                    updatedAt: new Date()
                 }
             )
         },

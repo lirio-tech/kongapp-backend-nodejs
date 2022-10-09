@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+const moment = require('moment-timezone');
+const dateSaoPaulo = moment.tz(Date.now(), "America/Sao_Paulo");
+
 const notificationSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -52,6 +55,16 @@ const notificationSchema = new mongoose.Schema({
     type: Boolean,
     default: true,     
   },      
+  createdAt: {
+    type: Date,
+    required: true, 
+    default: dateSaoPaulo
+  },
+  updatedAt: {
+    type: Date,
+    required: true, 
+    default: dateSaoPaulo
+  }                  
 });
-notificationSchema.set('timestamps', true);
+notificationSchema.set('timestamps', false);
 module.exports = mongoose.model('notifications', notificationSchema);
