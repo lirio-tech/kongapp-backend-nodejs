@@ -2,6 +2,7 @@ const authorization = require('../../middleware/auth-middleware');
 const dateUtils = require('../../utils/dateUtils').dateUtils();
 const notificationService = require('./notificationService').notificationService();
 const router = require('express').Router();
+const moment = require('moment-timezone');
 
 router.get('', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
@@ -13,7 +14,8 @@ router.get('', authorization(), async (req, res, next) => {
       let read = 0;
 
       for(let i in listModel) {
-          const createdAtBR = dateUtils.dateToStringPtBR(listModel[i].createdAt)
+          //const createdAtBR = dateUtils.dateToStringPtBR(listModel[i].createdAt)
+          //moment.tz(Date.now(), "America/Sao_Paulo");
           let notif = {
             isNotRead: listModel[i].isNotRead,
             onlyAdmin: listModel[i].onlyAdmin,
@@ -27,7 +29,7 @@ router.get('', authorization(), async (req, res, next) => {
             path: listModel[i].path,
             hyperLink: listModel[i].hyperLink,
             company: listModel[i].company,
-            createdAt: `${createdAtBR.substring(0,5)} ${createdAtBR.substring(11,16)}`
+            createdAt:  moment(listModel[i].createdAt).tz('America/Sao_Paulo').format('DD/MM HH:mm') //`${createdAtBR.substring(0,5)} ${createdAtBR.substring(11,16)}`
           }
           list.push(notif);
 
