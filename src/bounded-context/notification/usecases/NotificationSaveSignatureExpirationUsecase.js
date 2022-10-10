@@ -2,7 +2,7 @@ const NotificationModel = require("./model/NotificationModel");
 
 module.exports.notificationSaveSignatureExpiration = () => {
     return {
-        async save(company) {
+        async save(companyId) {
             const notification = {
                 title: "Assinatura",
                 description: `Sua assinatura está expirando, renove agora mesmo e continue com está expiriência incrivel com o Kongapp :)`,
@@ -13,7 +13,7 @@ module.exports.notificationSaveSignatureExpiration = () => {
                 emojiIcon: "",
                 path: `/admin/agendamentos`,
                 hyperLink: "",
-                company: company._id,
+                company: companyId,
                 onlyAdmin: true
             }
             await NotificationModel(notification).save();            

@@ -17,8 +17,8 @@ module.exports.notificationVerifyAndSaveSignatureExpiration = () => {
             console.log(`class=NotificationVerifyAndSaveSignatureExpirationUsecase, m=verifyAndSaveSignatureExpiration, s=processing, companies=${companies.length}`)
 
             for(let i in companies) {
-                await notificationSaveSignatureExpiration.save(companies[i]);            
-                console.log(`class=NotificationVerifyAndSaveSignatureExpirationUsecase, m=verifyAndSaveSignatureExpiration, s=creating, company=${companies[i]}`)
+                await notificationSaveSignatureExpiration.save(companies[i]._id);            
+                console.log(`class=NotificationVerifyAndSaveSignatureExpirationUsecase, m=verifyAndSaveSignatureExpiration, s=created, companyId=${companies[i]._id}`)
             }
             console.log(`class=NotificationVerifyAndSaveSignatureExpirationUsecase, m=verifyAndSaveSignatureExpiration, s=finished`) 
         },
