@@ -1,6 +1,6 @@
 const { ObjectId } = require('mongodb');
 const dateUtils = require('../../utils/dateUtils').dateUtils();
-const NotificationModel = require('./NotificationModel');
+const NotificationModel = require('./usecases/model/NotificationModel');
 
 module.exports.notificationService = () => {
     return {             
