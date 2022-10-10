@@ -1,4 +1,4 @@
-const NotificationModel = require("../NotificationModel");
+const NotificationModel = require("./model/NotificationModel");
 
 module.exports.notificationSaveSignatureExpiration = () => {
     return {
