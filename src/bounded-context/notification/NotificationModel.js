@@ -54,17 +54,7 @@ const notificationSchema = new mongoose.Schema({
   onlyAdmin: {
     type: Boolean,
     default: true,     
-  },      
-  // createdAt: {
-  //   type: Date,
-  //   required: true, 
-  //   default: dateSaoPaulo
-  // },
-  // updatedAt: {
-  //   type: Date,
-  //   required: true, 
-  //   default: dateSaoPaulo
-  // }                  
+  }         
 });
 notificationSchema.set('timestamps', true);
 module.exports = mongoose.model('notifications', notificationSchema);

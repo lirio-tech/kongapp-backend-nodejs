@@ -1,21 +1,19 @@
 const authorization = require('../../middleware/auth-middleware');
-const dateUtils = require('../../utils/dateUtils').dateUtils();
 const notificationService = require('./notificationService').notificationService();
 const router = require('express').Router();
 const moment = require('moment-timezone');
+const notificationVerifyAndSaveSignatureExpiration = require('./usecases/NotificationVerifyAndSaveSignatureExpirationUsecase').notificationVerifyAndSaveSignatureExpiration();
 
 router.get('', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
-      const listModel = await notificationService.get(req);
+      const listModel = await notificationFindByCompanyId.findByCompanyId(req.headers['company']);
 
       let list = [];
       let notRead = 0;
       let read = 0;
 
       for(let i in listModel) {
-          //const createdAtBR = dateUtils.dateToStringPtBR(listModel[i].createdAt)
-          //moment.tz(Date.now(), "America/Sao_Paulo");
           let notif = {
             isNotRead: listModel[i].isNotRead,
             onlyAdmin: listModel[i].onlyAdmin,
@@ -29,7 +27,7 @@ router.get('', authorization(), async (req, res, next) => {
             path: listModel[i].path,
             hyperLink: listModel[i].hyperLink,
             company: listModel[i].company,
-            createdAt:  moment(listModel[i].createdAt).tz('America/Sao_Paulo').format('DD/MM HH:mm') //`${createdAtBR.substring(0,5)} ${createdAtBR.substring(11,16)}`
+            createdAt:  moment(listModel[i].createdAt).tz('America/Sao_Paulo').format('DD/MM HH:mm')
           }
           list.push(notif);
 
@@ -53,18 +51,7 @@ router.get('', authorization(), async (req, res, next) => {
     }    
 });
 
-router.get('/a', async (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");  
-  try {
-      const notifications = await notificationService.getA();
-      res.status(200).json(notifications); 
-    } catch (error) {
-      console.error(`/notifications get`, error);
-      res.status(500).send(error);
-    }    
-});
-
-router.patch('/:_id', async (req, res, next) => {
+router.patch('/:_id', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
       await notificationService.updateReadNotification(req.params._id, req.headers['company']);
@@ -73,6 +60,20 @@ router.patch('/:_id', async (req, res, next) => {
       console.error(`/notifications patch`, error);
       res.status(500).send(error);
     }    
+});
+
+router.post('/signature-expiration', async (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");  
+  try {
+
+    notificationVerifyAndSaveSignatureExpiration.verifyAndSaveSignatureExpiration();
+    console.log("Process in execution...");
+    res.status(200).json({"message": "Process in execution..."}); 
+
+  } catch (error) {
+      console.error(`/notifications patch`, error);
+      res.status(500).send(error);
+  }    
 });
 
 module.exports = router;

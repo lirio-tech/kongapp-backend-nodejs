@@ -4,10 +4,6 @@ const NotificationModel = require('./NotificationModel');
 
 module.exports.notificationService = () => {
     return {             
-        async get(req) {
-            console.log(`class=NotificationService, m=get, companyId=${req.headers['company']}`)
-            return await NotificationModel.find({'company': ObjectId(req.headers['company']) }).sort({ createdAt: -1 })    
-        },
         async getA() {
             console.log(`class=NotificationService, m=get`)
             return await NotificationModel.find({})
@@ -43,7 +39,6 @@ module.exports.notificationService = () => {
             }
             await NotificationModel(notification).save();
         },      
-        async saveSignatureExpiration() {},
         async saveSignaturePaid() {},
         async saveSignaturePaid() {},                
         async saveMounthlyCloseInformation() {},

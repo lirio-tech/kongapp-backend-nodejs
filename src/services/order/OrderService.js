@@ -370,7 +370,7 @@ module.exports.orderService = () => {
               console.error(error);
               res.status(500).send(error);
           } 
-        },         
+        },           
         // OBSOLETO   
         async saveV8(order, userId, companyId) {
           try {
@@ -770,6 +770,9 @@ module.exports.orderService = () => {
               order: null
             }                  
           }        
-        }                        
+        },    
+        async findByCreateAtBetween(dateStart, dateEnd) {
+
+        }                    
     }
 }
