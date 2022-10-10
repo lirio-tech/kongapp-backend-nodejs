@@ -36,7 +36,7 @@ module.exports.notificationService = () => {
                 view: 'LIST', 
                 mdi: "mdi-clock",
                 emojiIcon: "",
-                path: `/admin/agendamentos/?_id=${schedule._id}&date=${ dateUtils.dateToStringEnUS(schedule.createdAt)}`,
+                path: `/admin/agendamentos/?_id=${schedule._id}&date=${ dateUtils.dateToStringEnUS(schedule.dateTimeStartAt)}`,
                 hyperLink: "",
                 company: schedule.companyId,
                 onlyAdmin: true

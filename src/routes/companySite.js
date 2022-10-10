@@ -119,7 +119,11 @@ router.get('/site-info/discovery/origin/app', async (req, res) => {
     const hostname = req.query.hostname;
     let __site = null;
 
-    if(String(hostname).includes('.kongbarber.com') || String(hostname).includes('.ladyapp.com.br') || String(hostname).includes('.kongapp.com.br')) {
+    if (
+      String(hostname).includes('.kongbarber.com') || 
+      String(hostname).includes('.ladyapp.com.br') || 
+      String(hostname).includes('.kongapp.com.br')
+    ) {
       let _arroba = hostname.replace('.kongbarber.com', '').replace('.ladyapp.com.br', '').replace('.kongapp.com.br', '');
       console.log('arroba ==> ', _arroba);
       __site = await CompanySite.findOne({ arroba: _arroba });
