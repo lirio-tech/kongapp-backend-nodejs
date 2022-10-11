@@ -3,6 +3,7 @@ const notificationService = require('./notificationService').notificationService
 const router = require('express').Router();
 const moment = require('moment-timezone');
 const { ObjectId } = require('mongodb');
+const notificationFindAllPageUsecase = require('./usecases/NotificationFindAllPageUsecase').notificationFindAllPageUsecase();
 const notificationFindByCompanyIdUsecase = require('./usecases/NotificationFindByCompanyIdUsecase').notificationFindByCompanyIdUsecase();
 const notificationVerifyAndSaveSignatureExpiration = require('./usecases/NotificationVerifyAndSaveSignatureExpirationUsecase').notificationVerifyAndSaveSignatureExpiration();
 
@@ -85,7 +86,7 @@ router.post('/signature-expiration', authorization(), async (req, res, next) => 
   }    
 });
 
-router.get('/signature-expiration', async (req, res, next) => {
+router.get('/signature-expiration', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
 
@@ -96,6 +97,29 @@ router.get('/signature-expiration', async (req, res, next) => {
       console.error(`/notifications patch`, error);
       res.status(500).send(error);
   }    
+});
+
+http://localhost:9000/.netlify/functions/api/notifications/list/all?page=0&size=1&sort=createdAt,asc
+router.get('/list/all', async (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");  
+  try {
+      // ---> /list/all?page=0&size=1&sort=createdAt,asc
+      console.log(`GET /notifications/list/all?page=${req.query.page}&size=${req.query.size}&sort=${req.query.sort}`)
+
+      let list = 
+          await notificationFindAllPageUsecase
+                  .findAll(
+                      Number(req.query.page), 
+                      Number(req.query.size), 
+                      req.query.sort
+                  )
+                  
+      res.status(200).json(list); 
+
+    } catch (error) {
+      console.error(`/notifications get`, error);
+      res.status(500).send(error);
+    }    
 });
 
 module.exports = router;
