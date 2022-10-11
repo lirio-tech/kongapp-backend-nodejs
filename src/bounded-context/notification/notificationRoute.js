@@ -76,4 +76,17 @@ router.post('/signature-expiration', async (req, res, next) => {
   }    
 });
 
+router.get('/signature-expiration', async (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");  
+  try {
+
+    let cs = await notificationVerifyAndSaveSignatureExpiration.get();
+    res.status(200).json(cs); 
+
+  } catch (error) {
+      console.error(`/notifications patch`, error);
+      res.status(500).send(error);
+  }    
+});
+
 module.exports = router;

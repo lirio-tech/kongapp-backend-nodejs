@@ -22,7 +22,15 @@ module.exports.notificationVerifyAndSaveSignatureExpiration = () => {
             }
             console.log(`class=NotificationVerifyAndSaveSignatureExpirationUsecase, m=verifyAndSaveSignatureExpiration, s=finished`) 
         },
+        async get() {
+            let after3Days = new Date();
+            after3Days.setDate(after3Days.getDate() + 3);            
+            
+            let before3days = new Date();
+            before3days.setDate(before3days.getDate() - 3);       
 
+            return await companyFindByPlanDateEnd.find(before3days, after3Days);     
+        },
 
     } 
 }
