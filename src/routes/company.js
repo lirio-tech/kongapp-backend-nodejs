@@ -51,9 +51,6 @@ router.put('/:_id/upgrade/plan', authorization(), async (req, res) => {
     console.log('company', company); 
     await Company.updateOne({_id: company._id }, company);
     
-    // execute in background
-    await notificationSaveSignaturePaidUsecase.save(company._id);
-    
     console.log('company.fake', company)
     if(!company.fake) {
       await new PaymentsHistoric({ plan: company.plan, company: company }).save();
@@ -103,6 +100,7 @@ router.put('/v2/:_id/upgrade/plan', authorization(), async (req, res) => {
   }
   console.log('company', company); 
   await Company.updateOne({_id: company._id }, company);
+  notificationSaveSignaturePaidUsecase.save(company._id); 
   console.log('company.fake', company)
   if(!company.fake) {
     await new PaymentsHistoric({ plan: company.plan, company: company }).save();
