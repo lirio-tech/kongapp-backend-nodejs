@@ -22,7 +22,7 @@ const notificationSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['NEW_SCHEDULE', 'SIGNATURE_EXPIRATION', 'WARNING'],
+    enum: ['NEW_SCHEDULE', 'SIGNATURE_EXPIRATION', 'WARNING', 'SIGNATURE_PAID'],
     required: true
   }, 
   view: {
