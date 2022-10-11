@@ -2,13 +2,18 @@ const authorization = require('../../middleware/auth-middleware');
 const notificationService = require('./notificationService').notificationService();
 const router = require('express').Router();
 const moment = require('moment-timezone');
+const { ObjectId } = require('mongodb');
 const notificationFindByCompanyIdUsecase = require('./usecases/NotificationFindByCompanyIdUsecase').notificationFindByCompanyIdUsecase();
 const notificationVerifyAndSaveSignatureExpiration = require('./usecases/NotificationVerifyAndSaveSignatureExpirationUsecase').notificationVerifyAndSaveSignatureExpiration();
 
 router.get('', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
-      const listModel = await notificationFindByCompanyIdUsecase.findByCompanyId(req.headers['company']);
+      const listModel = 
+        await notificationFindByCompanyIdUsecase
+          .findByCompanyId(
+              ObjectId(req.headers['company'])
+          );
 
       let list = [];
       let notRead = 0;
@@ -63,10 +68,12 @@ router.patch('/:_id', authorization(), async (req, res, next) => {
     }    
 });
 
-router.post('/signature-expiration', async (req, res, next) => {
+router.post('/signature-expiration', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
 
+    // TODO only sys_admin
+    
     await notificationVerifyAndSaveSignatureExpiration.verifyAndSaveSignatureExpiration();
     console.log("Process in execution...");
     res.status(200).json({"message": "Process in execution..."}); 
@@ -77,7 +84,7 @@ router.post('/signature-expiration', async (req, res, next) => {
   }    
 });
 
-router.get('/signature-expiration', async (req, res, next) => {
+router.get('/signature-expiration', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
 
