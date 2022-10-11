@@ -27,6 +27,13 @@ module.exports.notificationSaveSignatureExpiration = () => {
                 _path = '/public/simulator-plan'
             }
 
+            let _mdiColor = 'yellow';
+            if(diffDays === 0) {
+                _mdiColor = 'orange'  
+            } else if(diffDays < 0) {
+                _mdiColor = 'red'  
+            }
+
             const notification = {
                 title: "Assinatura",
                 //description: `Sua assinatura está expirando, renove agora mesmo e continue com está expiriência incrivel com o Kongapp :)`,
@@ -34,8 +41,8 @@ module.exports.notificationSaveSignatureExpiration = () => {
                 isNotRead: true,     
                 type: 'SIGNATURE_EXPIRATION', 
                 view: 'LIST', 
-                mdi: "mdi-calendar",
-                mdiColor: 'red',
+                mdi: "mdi-calendar-clock",
+                mdiColor: _mdiColor,
                 emojiIcon: "",
                 path: _path,
                 hyperLink: "",
