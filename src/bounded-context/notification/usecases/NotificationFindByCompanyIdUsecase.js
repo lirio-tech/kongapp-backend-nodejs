@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 const NotificationModel = require("./model/NotificationModel");
 
-module.exports.notificationFindByCompanyId = () => {
+module.exports.notificationFindByCompanyIdUsecase = () => {
     return {             
         async findByCompanyId(companyId) {
             console.log(`class=NotificationService, m=get, companyId=${companyId}`)

@@ -2,12 +2,13 @@ const authorization = require('../../middleware/auth-middleware');
 const notificationService = require('./notificationService').notificationService();
 const router = require('express').Router();
 const moment = require('moment-timezone');
+const notificationFindByCompanyIdUsecase = require('./usecases/NotificationFindByCompanyIdUsecase').notificationFindByCompanyIdUsecase();
 const notificationVerifyAndSaveSignatureExpiration = require('./usecases/NotificationVerifyAndSaveSignatureExpirationUsecase').notificationVerifyAndSaveSignatureExpiration();
 
 router.get('', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
-      const listModel = await notificationFindByCompanyId.findByCompanyId(req.headers['company']);
+      const listModel = await notificationFindByCompanyIdUsecase.findByCompanyId(req.headers['company']);
 
       let list = [];
       let notRead = 0;
