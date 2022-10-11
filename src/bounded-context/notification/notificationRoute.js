@@ -66,7 +66,7 @@ router.post('/signature-expiration', async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
 
-    notificationVerifyAndSaveSignatureExpiration.verifyAndSaveSignatureExpiration();
+    await notificationVerifyAndSaveSignatureExpiration.verifyAndSaveSignatureExpiration();
     console.log("Process in execution...");
     res.status(200).json({"message": "Process in execution..."}); 
 
