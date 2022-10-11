@@ -9,7 +9,7 @@ module.exports.notificationSaveSignaturePaid = () => {
                 isNotRead: true,     
                 type: 'SIGNATURE_PAID', 
                 view: 'LIST', 
-                mdi: "mdi-rocket",
+                mdi: "mdi-rocket-launch",
                 mdiColor: 'green',
                 emojiIcon: "",
                 path: `/public/avalie-nos`,

@@ -41,7 +41,7 @@ module.exports.notificationSaveSignatureExpiration = () => {
                 isNotRead: true,     
                 type: 'SIGNATURE_EXPIRATION', 
                 view: 'LIST', 
-                mdi: "mdi-calendar-clock",
+                mdi: "mdi-rocket-outline",
                 mdiColor: _mdiColor,
                 emojiIcon: "",
                 path: _path,

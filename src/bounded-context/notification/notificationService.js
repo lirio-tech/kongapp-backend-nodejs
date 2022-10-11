@@ -30,7 +30,7 @@ module.exports.notificationService = () => {
                 isNotRead: true,     
                 type: 'NEW_SCHEDULE', 
                 view: 'LIST', 
-                mdi: "mdi-clock",
+                mdi: "mdi-calendar-clock",
                 mdiColor: '',
                 emojiIcon: "",
                 path: `/admin/agendamentos/?_id=${schedule._id}&date=${ dateUtils.dateToStringEnUS(schedule.dateTimeStartAt)}`,
