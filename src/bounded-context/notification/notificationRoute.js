@@ -85,7 +85,7 @@ router.post('/signature-expiration', authorization(), async (req, res, next) => 
   }    
 });
 
-router.get('/signature-expiration', authorization(), async (req, res, next) => {
+router.get('/signature-expiration', async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
 

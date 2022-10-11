@@ -30,6 +30,28 @@ module.exports.notificationVerifyAndSaveSignatureExpiration = () => {
             before3days.setDate(before3days.getDate() - 3);       
 
             return await companyFindByPlanDateEnd.find(before3days, after3Days);     
+
+            // let diffDays = Math.ceil( (new Date().getTime() - c[0].plan.dateEnd.getTime()) / (1000 * 3600 * 24) );
+            // console.log('diffDays',diffDays);
+            // let description = 'Sua assinatura Venceu, clique aqui e renove agora mesmo';
+            // if(diffDays > 1) {
+            //     description = `Faltam ${diffDays} dias para a sua assinatura expirar, renove agora mesmo e continue com essa experiência incrível 😎 `
+            // } 
+            // else if (diffDays === 1) {
+            //     description = `Sua assinatura irá expirar amanhã, não se esqueça de renovar ;)`
+            // }
+            // else if (diffDays === 0) {
+            //     description = `Sua assinatura vence Hoje, não deixe de renovar para continuar utilizando o Aplicativo :)`
+            // }            
+            // else if (diffDays === -1) {
+            //     description = `Sua assinatura venceu ontem, mantenha o funcionamento no App e renove o plano clicando aqui :/`
+            // }            
+            // else if (diffDays < -1) {
+            //     description = `Sua assinatura venceu há ${diffDays*-1} dais, em breve seu acesso ao aplicativo será reduzido :(`
+            // }         
+            
+            // return c;
+
         },
 
     } 
