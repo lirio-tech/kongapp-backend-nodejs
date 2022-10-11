@@ -10,6 +10,7 @@ module.exports.notificationSaveSignatureExpiration = () => {
                 type: 'SIGNATURE_EXPIRATION', 
                 view: 'LIST', 
                 mdi: "mdi-calendar",
+                mdiColor: 'red',
                 emojiIcon: "",
                 path: `/admin/agendamentos`,
                 hyperLink: "",

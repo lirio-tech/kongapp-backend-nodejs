@@ -10,6 +10,7 @@ module.exports.notificationSaveSignaturePaid = () => {
                 type: 'SIGNATURE_PAID', 
                 view: 'LIST', 
                 mdi: "mdi-money",
+                mdiColor: 'green',
                 emojiIcon: "",
                 path: `/public/avalie-nos`,
                 hyperLink: "",

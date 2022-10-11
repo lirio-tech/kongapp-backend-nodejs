@@ -35,6 +35,10 @@ const notificationSchema = new mongoose.Schema({
     type: String,
     max: 100,
   },
+  mdiColor: {
+    type: String,
+    max: 100
+  },  
   emojiIcon: {
     type: String,
     max: 100,

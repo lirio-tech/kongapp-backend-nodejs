@@ -31,6 +31,7 @@ module.exports.notificationService = () => {
                 type: 'NEW_SCHEDULE', 
                 view: 'LIST', 
                 mdi: "mdi-clock",
+                mdiColor: '',
                 emojiIcon: "",
                 path: `/admin/agendamentos/?_id=${schedule._id}&date=${ dateUtils.dateToStringEnUS(schedule.dateTimeStartAt)}`,
                 hyperLink: "",
