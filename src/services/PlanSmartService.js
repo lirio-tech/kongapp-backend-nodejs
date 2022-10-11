@@ -18,7 +18,7 @@ module.exports.planSmartService = () => {
             if(company.plan.name === this.PlanoSmart.LABEL) {
                 if(totalUsers >= company.plan.amountUsers) {
                     return this.getMsgJson(
-                        `Voce pode possuir somente ${company.plan.amountUsers} Usuarios Ativos, entre em contato conosco caso queira cadastrar novos usuarios`,
+                        `Você pode possuir somente ${company.plan.amountUsers} usuários ativos, entre em contato conosco caso queira cadastrar novos usuários`,
                         this.PlanoSmart.LABEL,
                         false
                     )
@@ -33,7 +33,7 @@ module.exports.planSmartService = () => {
                 console.log(usersEnabledArray);
                 if(usersEnabledArray.length >= company.plan.amountUsers) {
                     return this.getMsgJson( 
-                        `Voce pode possuir somente ${company.plan.amountUsers} Usuarios Ativos, entre em contato conosco caso queira aumentar os usuarios ativos`,
+                        `Você pode possuir somente ${company.plan.amountUsers} usuários ativos, entre em contato conosco caso queira aumentar os usuários ativos`,
                         this.PlanoSmart.LABEL,
                         false
                     )

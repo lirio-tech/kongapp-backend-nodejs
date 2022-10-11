@@ -18,7 +18,7 @@ module.exports.planCustomService = () => {
             if(company.plan.name === this.PlanoCustom.LABEL) {
                 if(totalUsers >= company.plan.amountUsers) {
                     return this.getMsgJson(
-                        `Voce pode possuir somente ${company.plan.amountUsers} Usuarios Ativos, entre em contato conosco caso queira cadastrar novos usuarios`,
+                        `Você pode possuir somente ${company.plan.amountUsers} usuários Ativos, entre em contato conosco caso queira cadastrar novos usuários`,
                         this.PlanoCustom.LABEL,
                         false
                     )
@@ -33,7 +33,7 @@ module.exports.planCustomService = () => {
                 console.log(usersEnabledArray);
                 if(usersEnabledArray.length >= company.plan.amountUsers) {
                     return this.getMsgJson( 
-                        `Voce pode possuir somente ${company.plan.amountUsers} Usuarios Ativos, entre em contato conosco caso queira aumentar os usuarios ativos`,
+                        `Você pode possuir somente ${company.plan.amountUsers} usuários ativos, entre em contato conosco caso queira aumentar os usuários ativos`,
                         this.PlanoCustom.LABEL,
                         false
                     )

@@ -47,7 +47,7 @@ router.patch('/:_id', authorization(), async (req, res) => {
         let diffHour = Math.abs(new Date() - userRequestInDB.disabledAt) / 1000 / 60 / 60;
         console.log('diffHour', diffHour)
         if(diffHour < 72) {  
-          let msg = `Usuario foi desativado a menos de 3 dias, voce podera ativa-lo novamente somente apos os 3 dias depois de desativa-lo`;
+          let msg = `Usuário foi desativado a menos de 3 dias, você poderá ativa-lo novamente somente após os 3 dias depois de desativa-lo`;
           res.status(422).json({message: msg}); 
           return;  
         }

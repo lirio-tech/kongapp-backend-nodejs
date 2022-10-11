@@ -9,11 +9,11 @@ module.exports.planBasicoService = () => {
             LABEL: 'Basico',
             PAYMENT_PRICE: CONST_PAYMENT_PRICE,
             MAX_CASH: CONST_MAX_CASH,
-            MAX_CASH_MSG: `Valor Total no Mes Excedeu o valor de R$${CONST_MAX_CASH} permitido do Plano Free`,
+            MAX_CASH_MSG: `Valor Total no Mês Excedeu o valor de R$${CONST_MAX_CASH} permitido para o Plano Free`,
             USERS_ENABLED: CONST_USERS_ENABLED,
             ADMIN_ENABLED: 1, 
             COMMON_ENABLED: 1,
-            USERS_ENABLED_MSG: `Voce pode possuir somente ${CONST_USERS_ENABLED} Usuarios Ativos no Plano Premium Basico, para cadastrar mais usuarios confira nossos outros Planos`
+            USERS_ENABLED_MSG: `Você pode possuir somente ${CONST_USERS_ENABLED} Usuários Ativos no Plano Premium Básico, para cadastrar mais usuários confira nossos outros Planos`
         },
         validatePlanNewOrderService: function(company, valueTotalMonth) {
             if(company.plan.name === this.PlanoBasico.LABEL) { 

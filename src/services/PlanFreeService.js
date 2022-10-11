@@ -10,8 +10,8 @@ module.exports.planFreeService = () => {
             USERS_ENABLED: CONST_USERS_ENABLED,
             ADMIN_ENABLED: 1, 
             COMMON_ENABLED: 0,
-            USERS_ENABLED_MSG: `Voce pode possuir somente ${CONST_USERS_ENABLED} Usuario no Plano Free, para cadastrar mais usuarios garanta nosso Plano Premium`,
-            USERS_ENABLED_UPDATE_MSG: `Voce nao pode habilitar o usuario porque seu Plano FREE permite somente ${CONST_USERS_ENABLED} usuario Ativo `
+            USERS_ENABLED_MSG: `Você pode possuir somente ${CONST_USERS_ENABLED} único usuário no Plano Free, para cadastrar mais usuários garanta nosso Plano Premium`,
+            USERS_ENABLED_UPDATE_MSG: `Você não pode habilitar o usuário porque seu Plano FREE permite somente ${CONST_USERS_ENABLED} usuário Ativo `
         },
         validatePlanNewOrderService: function(company, valueTotalMonth) {
             if(company.plan.name === this.PlanoFree.LABEL) { 

@@ -9,11 +9,11 @@ module.exports.planSimplesService = () => {
             LABEL: 'Simples',
             PAYMENT_PRICE: CONST_PAYMENT_PRICE,
             MAX_CASH: CONST_MAX_CASH,
-            MAX_CASH_MSG: `Valor Total no Mes Excedeu o valor de R$${CONST_MAX_CASH} permitido para o Plano`,
+            MAX_CASH_MSG: `Valor Total no Mês Excedeu o valor de R$${CONST_MAX_CASH} permitido para o Plano`,
             USERS_ENABLED: CONST_USERS_ENABLED,
             ADMIN_ENABLED: 1, 
             COMMON_ENABLED: 1,
-            USERS_ENABLED_MSG: `Voce pode possuir somente ${CONST_USERS_ENABLED} Usuarios Ativos no Plano Premium Simples, para cadastrar mais usuarios confira nossos outros Planos`
+            USERS_ENABLED_MSG: `Você pode possuir somente ${CONST_USERS_ENABLED} usuários ativos no Plano Premium Simples, para cadastrar mais usuários confira nossos outros Planos`
         },
         validatePlanNewOrderService: function(company, valueTotalMonth) {
             if(company.plan.name === this.PlanoSimples.LABEL) { 
