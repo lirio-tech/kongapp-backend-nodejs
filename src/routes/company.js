@@ -7,6 +7,7 @@ const authorization = require('../middleware/auth-middleware');
 const User = require('../models/User.js');
 const { ObjectId } = require('mongodb');
 const PlanCustomCompany = require('../models/PlanCustomCompany.js');
+const notificationSaveSignaturePaidUsecase  = require('../bounded-context/notification/usecases/NotificationSaveSignaturePaidUsecase.js').notificationSaveSignaturePaid();
 const companyService = require('../services/CompanyService.js').companyService();
 const userService = require('../services/UserService').userService();
 
@@ -49,10 +50,15 @@ router.put('/:_id/upgrade/plan', authorization(), async (req, res) => {
     }
     console.log('company', company); 
     await Company.updateOne({_id: company._id }, company);
+    
+    // execute in background
+    notificationSaveSignaturePaidUsecase.save(company._id);
+    
     console.log('company.fake', company)
     if(!company.fake) {
       await new PaymentsHistoric({ plan: company.plan, company: company }).save();
     }
+
     res.status(200).json(company);   
 })
 
