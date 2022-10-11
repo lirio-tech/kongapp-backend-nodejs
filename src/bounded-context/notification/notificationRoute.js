@@ -29,6 +29,7 @@ router.get('', authorization(), async (req, res, next) => {
             type: listModel[i].type,
             view: listModel[i].view,
             mdi: listModel[i].mdi,
+            mdiColor: listModel[i].mdiColor,
             emojiIcon: listModel[i].emojiIcon,
             path: listModel[i].path,
             hyperLink: listModel[i].hyperLink,
