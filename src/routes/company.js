@@ -52,7 +52,7 @@ router.put('/:_id/upgrade/plan', authorization(), async (req, res) => {
     await Company.updateOne({_id: company._id }, company);
     
     // execute in background
-    notificationSaveSignaturePaidUsecase.save(company._id);
+    await notificationSaveSignaturePaidUsecase.save(company._id);
     
     console.log('company.fake', company)
     if(!company.fake) {
