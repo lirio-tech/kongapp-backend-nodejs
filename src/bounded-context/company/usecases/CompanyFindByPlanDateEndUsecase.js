@@ -19,7 +19,8 @@ module.exports.companyFindByPlanDateEnd = () => {
                       '$dateFromString': {
                         'dateString': '$plan.dateEnd'
                       }
-                    }
+                    },
+                    'plan.name': '$plan.name'  
                   }
                 }, {
                   '$match': {
