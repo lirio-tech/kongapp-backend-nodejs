@@ -49,7 +49,6 @@ module.exports.notificationVerifyAndSaveSignatureExpiration = () => {
             // else if (diffDays < -1) {
             //     description = `Sua assinatura venceu há ${diffDays*-1} dais, em breve seu acesso ao aplicativo será reduzido :(`
             // }         
-            
             // return c;
 
         },
