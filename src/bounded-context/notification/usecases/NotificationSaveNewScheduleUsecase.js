@@ -1,26 +1,9 @@
-const { ObjectId } = require('mongodb');
+const NotificationModel = require("./model/NotificationModel");
 const dateUtils = require('../../utils/dateUtils').dateUtils();
-const NotificationModel = require('./usecases/model/NotificationModel');
 
-module.exports.notificationService = () => {
-    return {             
-        async getA() {
-            console.log(`class=NotificationService, m=get`)
-            return await NotificationModel.find({})
-        },      
-        async updateReadNotification(notificationId, companyId) {
-            await NotificationModel.updateOne(
-                {
-                    _id: ObjectId(notificationId),
-                    company: ObjectId(companyId)
-                },
-                {
-                    isNotRead: false,
-                    updatedAt: new Date()
-                }
-            )
-        },
-        async saveNewSchedule(schedule) {
+module.exports.notificationsaveNewScheduleUsecase = () => {
+    return {
+        async save(schedule) {
             const dtTimeBR = dateUtils.dateToStringPtBR(schedule.dateTimeStartAt);
             const scheduleDate = dtTimeBR.substring(0, 5);
             const scheduleTime = dtTimeBR.substring(11, 16);
@@ -39,10 +22,6 @@ module.exports.notificationService = () => {
                 onlyAdmin: true
             }
             await NotificationModel(notification).save();
-        },      
-        async saveSignaturePaid() {},
-        async saveSignaturePaid() {},                
-        async saveMounthlyCloseInformation() {},
-        async saveRecommendForFriends() {}
-    } 
+        }
+    }
 }

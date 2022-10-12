@@ -1,11 +1,11 @@
-const authorization = require('../../middleware/auth-middleware');
-const notificationService = require('./notificationService').notificationService();
-const router = require('express').Router();
-const moment = require('moment-timezone');
-const { ObjectId } = require('mongodb');
-const notificationFindAllPageUsecase = require('./usecases/NotificationFindAllPageUsecase').notificationFindAllPageUsecase();
-const notificationFindByCompanyIdUsecase = require('./usecases/NotificationFindByCompanyIdUsecase').notificationFindByCompanyIdUsecase();
-const notificationVerifyAndSaveSignatureExpiration = require('./usecases/NotificationVerifyAndSaveSignatureExpirationUsecase').notificationVerifyAndSaveSignatureExpiration();
+const authorization = require('../../middleware/auth-middleware')
+const router = require('express').Router()
+const moment = require('moment-timezone')
+const { ObjectId } = require('mongodb')
+const notificationFindAllPageUsecase = require('./usecases/NotificationFindAllPageUsecase').notificationFindAllPageUsecase()
+const notificationFindByCompanyIdUsecase = require('./usecases/NotificationFindByCompanyIdUsecase').notificationFindByCompanyIdUsecase()
+const notificationUpdateReadUsecase = require('./usecases/NotificationUpdateReadUsecase').notificationUpdateReadUsecase()
+const notificationVerifyAndSaveSignatureExpiration = require('./usecases/NotificationVerifyAndSaveSignatureExpirationUsecase').notificationVerifyAndSaveSignatureExpiration()
 
 router.get('', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
@@ -62,7 +62,7 @@ router.get('', authorization(), async (req, res, next) => {
 router.patch('/:_id', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
-      await notificationService.updateReadNotification(req.params._id, req.headers['company']);
+      await notificationUpdateReadUsecase.update(req.params._id, req.headers['company']);
       res.status(204); 
     } catch (error) {
       console.error(`/notifications patch`, error);
@@ -110,10 +110,7 @@ router.get('/list/all', async (req, res, next) => {
           await notificationFindAllPageUsecase
                   .findAll(
                       Number(req.query.page), 
-                      Number(req.query.size), 
-                      req.query.sort
-                  )
-                  
+                          Number(req.query.size), req.query.sort);
       res.status(200).json(list); 
 
     } catch (error) {
