@@ -5,6 +5,7 @@ const { ObjectId } = require('mongodb')
 const notificationFindAllPageUsecase = require('./usecases/NotificationFindAllPageUsecase').notificationFindAllPageUsecase()
 const notificationFindByCompanyIdUsecase = require('./usecases/NotificationFindByCompanyIdUsecase').notificationFindByCompanyIdUsecase()
 const notificationUpdateReadUsecase = require('./usecases/NotificationUpdateReadUsecase').notificationUpdateReadUsecase()
+const notificationDeleteUsecase = require('./usecases/NotificationDeleteUsecase').notificationDeleteUsecase()
 const notificationVerifyAndSaveSignatureExpiration = require('./usecases/NotificationVerifyAndSaveSignatureExpirationUsecase').notificationVerifyAndSaveSignatureExpiration()
 
 router.get('', authorization(), async (req, res, next) => {
