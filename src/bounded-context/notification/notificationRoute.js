@@ -99,7 +99,6 @@ router.get('/signature-expiration', authorization(), async (req, res, next) => {
   }    
 });
 
-http://localhost:9000/.netlify/functions/api/notifications/list/all?page=0&size=1&sort=createdAt,asc
 router.get('/list/all', async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
@@ -112,6 +111,21 @@ router.get('/list/all', async (req, res, next) => {
                       Number(req.query.page), 
                           Number(req.query.size), req.query.sort);
       res.status(200).json(list); 
+
+    } catch (error) {
+      console.error(`/notifications get`, error);
+      res.status(500).send(error);
+    }    
+});
+
+router.delete('/:_id', async (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");  
+  try {
+      console.log(`DELETE /notifications/${req.params._id}`)
+      await notificationDeleteUsecase.delete(
+        ObjectId(req.params._id)
+      );
+      res.status(204)
 
     } catch (error) {
       console.error(`/notifications get`, error);
