@@ -9,7 +9,7 @@ const companyService = require('../services/CompanyService.js').companyService()
 const dateUtils = require('../utils/dateUtils').dateUtils();
 const userService = require('../services/UserService').userService();
 const CompanySite = require('../models/CompanySite');
-const notificationSaveNewScheduleUsecase = require('../bounded-context/notification/usecases/NotificationSaveNewScheduleUsecase').notificationsaveNewScheduleUsecase();
+const notificationSaveNewScheduleUsecase = require('../bounded-context/notification/usecases/NotificationSaveNewScheduleUsecase').notificationSaveNewScheduleUsecase();
 const messageLabels = require('../services/validation/Message').messageLabels();
 
 const SUNDAY = 0;

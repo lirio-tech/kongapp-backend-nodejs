@@ -1,5 +1,5 @@
 const NotificationModel = require("./model/NotificationModel");
-const dateUtils = require('../../utils/dateUtils').dateUtils();
+const dateUtils = require('../../../utils/dateUtils').dateUtils();
 
 module.exports.notificationSaveNewScheduleUsecase = () => {
     return {

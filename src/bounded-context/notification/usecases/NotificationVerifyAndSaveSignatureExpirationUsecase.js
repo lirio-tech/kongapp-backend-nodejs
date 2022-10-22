@@ -1,6 +1,5 @@
 const companyFindByPlanDateEnd = require('../../company/usecases/CompanyFindByPlanDateEndUsecase').companyFindByPlanDateEnd();
 const notificationSaveSignatureExpiration = require('./NotificationSaveSignatureExpirationUsecase').notificationSaveSignatureExpiration();
-const companyFindByIdUsecase = require('../../company/usecases/CompanyFindByIdUsecase').companyFindByIdUsecase();
 
 module.exports.notificationVerifyAndSaveSignatureExpiration = () => {
     return {             
