@@ -63,10 +63,13 @@ router.get('', authorization(), async (req, res, next) => {
 router.patch('/:_id', authorization(), async (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");  
   try {
-      await notificationUpdateReadUsecase.update(req.params._id, req.headers['company']);
+      await notificationUpdateReadUsecase.update(
+        ObjectId(req.params._id), 
+        ObjectId(req.headers['company'])
+      );
       res.status(204); 
     } catch (error) {
-      console.error(`/notifications patch`, error);
+      console.error(`/notifications patch`, error); 
       res.status(500).send(error);
     }    
 });

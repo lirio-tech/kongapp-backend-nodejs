@@ -1,17 +1,18 @@
+const NotificationModel = require("./model/NotificationModel");
 
 module.exports.notificationUpdateReadUsecase = () => {
     return {
-        async update(notificationId, companyId) {
+        async update(objectNotificationId, objectCompanyId) {
             await NotificationModel.updateOne(
                 {
-                    _id: ObjectId(notificationId),
-                    company: ObjectId(companyId)
+                    _id: objectNotificationId,
+                    company: objectCompanyId
                 },
                 {
                     isNotRead: false,
                     updatedAt: new Date()
                 }
-            )            
+            )               
         }
     }
 }
