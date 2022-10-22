@@ -9,7 +9,7 @@ const companyService = require('../services/CompanyService.js').companyService()
 const dateUtils = require('../utils/dateUtils').dateUtils();
 const userService = require('../services/UserService').userService();
 const CompanySite = require('../models/CompanySite');
-const notificationsaveNewScheduleUsecase = require('../bounded-context/notification/usecases/notificationsaveNewScheduleUsecase').notificationsaveNewScheduleUsecase();
+const notificationSaveNewScheduleUsecase = require('../bounded-context/notification/usecases/NotificationSaveNewScheduleUsecase').notificationsaveNewScheduleUsecase();
 const messageLabels = require('../services/validation/Message').messageLabels();
 
 const SUNDAY = 0;
@@ -724,7 +724,7 @@ router.post('/site', async (req, res) => {
       } 
 
       const schedule = await new Schedule(scheduleNew).save();  
-      notificationsaveNewScheduleUsecase.save(schedule); // TODO Kafka Producer
+      notificationSaveNewScheduleUsecase.save(schedule); // TODO Kafka Producer
 
       res.status(200).json(schedule);
     } catch (error) {

@@ -1,7 +1,7 @@
 const NotificationModel = require("./model/NotificationModel");
 const dateUtils = require('../../utils/dateUtils').dateUtils();
 
-module.exports.notificationsaveNewScheduleUsecase = () => {
+module.exports.notificationSaveNewScheduleUsecase = () => {
     return {
         async save(schedule) {
             const dtTimeBR = dateUtils.dateToStringPtBR(schedule.dateTimeStartAt);
