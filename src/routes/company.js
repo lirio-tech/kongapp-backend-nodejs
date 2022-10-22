@@ -30,7 +30,6 @@ router.put('/:_id/upgrade/plan', authorization(), async (req, res) => {
     }
     
     let company = await Company.findOne({_id:req.params._id});
-    console.log('company ===',company);
     company.planOld = company.plan;
 
     if(plan.name === 'Custom' && 
@@ -62,7 +61,6 @@ router.put('/:_id/upgrade/plan', authorization(), async (req, res) => {
 router.put('/v2/:_id/upgrade/plan', authorization(), async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); 
   let planApply = req.body;
-  console.log(planApply);
 
   const userSysAdmin = await User.findOne({_id: req.userId});
   if(!userSysAdmin || userSysAdmin.type !== 'sys_admin') {

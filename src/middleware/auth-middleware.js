@@ -2,9 +2,6 @@ const jwt = require('jsonwebtoken');
 
 module.exports = () => {
   return (req, res, next) => {
-    console.log('authorization middleware running...');
-    console.log(req.headers);
-
     const token = req.headers['authorization'];
     if (!token)
       return res
@@ -12,7 +9,6 @@ module.exports = () => {
         .json({ auth: false, message: 'No token provided.' });
 
     const tokenBody = token.slice(7);
-    console.log(tokenBody);
     jwt.verify(tokenBody, process.env.JWT_SECRET, function (err, decoded) {
       console.log(err);
       if (err) {

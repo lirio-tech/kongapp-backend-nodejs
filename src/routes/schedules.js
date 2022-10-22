@@ -46,8 +46,6 @@ router.post('', authorization(), async (req, res) => {
       // TODO Conflit of Schedule
       // POST and PUT with code repeated
 
-      console.log('req.body', req.body);
-
       let _dateTimeStartAt = new Date(
         Number(req.body.dateAt.substring(0,4)), 
         Number(req.body.dateAt.substring(5,7))-1, 

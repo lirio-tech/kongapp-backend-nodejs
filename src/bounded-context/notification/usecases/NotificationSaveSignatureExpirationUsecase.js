@@ -4,7 +4,6 @@ module.exports.notificationSaveSignatureExpiration = () => {
     return {
         async save(companyId, companyPlanName, companyPlanDateEnd) {
             let diffDays = Math.ceil( (companyPlanDateEnd.getTime() - new Date().getTime()) / (1000 * 3600 * 24) );
-            console.log(diffDays);
             let description = 'Sua assinatura Venceu, clique aqui e renove agora mesmo';
             if(diffDays > 1) {
                 description = `Faltam ${diffDays} dias para a sua assinatura expirar, renove agora mesmo e continue com essa experiência incrível 😎 `

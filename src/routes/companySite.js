@@ -85,7 +85,6 @@ router.patch('/:_idCompany/site-info/:_idSite', authorization(), async (req, res
           companySite.address.description = `${companySite.address.street}, ${companySite.address.number} - ${companySite.address.district} - ${companySite.address.city} - ${companySite.address.state}`
       }
       // Update
-      console.log(companySite);
       await companySiteService.updateInfos(companyId, companySite);
      
       // async

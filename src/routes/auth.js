@@ -105,7 +105,6 @@ router.post('/signup/company', async (req, res) => {
     const companyNew = await new Company(req.body.company).save();
 
     const companySite = companySiteService.getNewCompanySite(companyNew, userNew.phone_number);
-    console.log('companySite', companySite);
     await new CompanySite(companySite).save();
 
     userNew.company = companyNew._id;
@@ -178,7 +177,6 @@ router.post('/signin', async (req, res) => {
 router.post('/_/v2/signin', async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); 
   try {
-        console.log(req.body);
         const user = await User.findOne({ phone_number: req.body.phone_number, disabled: false }).exec();
 
         if (user === null) {

@@ -84,7 +84,6 @@ router.get('/v2/:dateIni/:dateEnd', authorization(), async (req, res, next) => {
         company: req.headers['company']
       };         
     }
-    console.log('query mongo => ', query);
  
     let pageNumber = req.query.pageNumber ? Number(req.query.pageNumber) : 1;
     let numberPerPage = req.query.numberPerPage ? Number(req.query.numberPerPage) : 20;
