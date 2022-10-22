@@ -21,7 +21,7 @@ const FRIDAY = 5;
 const SATURDAY = 6;
 
 router.post('', authorization(), async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); 
+    res.setHeader("Access-Control-Allow-Origin", "*"); 
     try { 
 
       const company = await Company.findOne({_id: req.headers['company']});

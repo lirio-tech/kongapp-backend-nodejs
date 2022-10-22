@@ -192,7 +192,6 @@ router.post('/_/v2/signin', async (req, res) => {
           res.status(401).json({ auth: false, message });
           return;
         }
-        console.log('sign-in', user);
       
         const tokenId = user._id; 
         const token = jwt.sign({ tokenId }, process.env.JWT_SECRET, {
