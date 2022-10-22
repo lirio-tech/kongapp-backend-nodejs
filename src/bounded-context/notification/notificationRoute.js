@@ -67,7 +67,7 @@ router.patch('/:_id', authorization(), async (req, res, next) => {
         ObjectId(req.params._id), 
         ObjectId(req.headers['company'])
       );
-      res.status(204); 
+      res.status(204).json({message: 'OK'})
     } catch (error) {
       console.error(`/notifications patch`, error); 
       res.status(500).send(error);
@@ -129,7 +129,7 @@ router.delete('/:_id', async (req, res, next) => {
       await notificationDeleteUsecase.delete(
         ObjectId(req.params._id)
       );
-      res.status(204)
+      res.status(204).json({message: 'Notificação Excluída com sucesso'})
 
     } catch (error) {
       console.error(`/notifications get`, error);
