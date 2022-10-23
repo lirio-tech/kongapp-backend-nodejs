@@ -164,7 +164,7 @@ router.post('/days-of-the-week', authorization(), async (req, res) => {
     res.status(200).json({ chartData: resultChart, data: result });
      
   } catch (error) {
-      console.error('analytics :: days-of-the-week', error);
+      console.error('api-error:: analytics :: days-of-the-week', error);
       res.status(500).send(error);
   }
 });
@@ -206,7 +206,7 @@ router.post('/users', authorization(), async (req, res) => {
     res.status(200).json({ data: orderByUsers, chartData: _data });
      
   } catch (error) {
-      console.error('analytics :: users', error);
+      console.error('api-error:: analytics :: users', error);
       res.status(500).send(error);
   } 
 });
@@ -260,7 +260,7 @@ router.post('/companies-actives', authorization(), async (req, res) => {
     res.status(200).json(result); 
      
   } catch (error) {
-      console.error('analytics :: companies-actives', error);
+      console.error('api-error:: analytics :: companies-actives', error);
       res.status(500).send(error);
   } 
 });
@@ -302,7 +302,7 @@ router.get('/payments-type/:dateStart/:dateEnd', async (req, res) => {
     });
     
   } catch (error) {
-      console.error('analytics :: payments-type/:dateStart/:dateEnd', error);
+      console.error('api-error:: analytics :: payments-type/:dateStart/:dateEnd', error);
       res.status(500).send(error);
   } 
 });
@@ -316,7 +316,7 @@ router.get('/months-sum/:startDate/:endDate', authorization(), async(req, res) =
     console.log('result data: ', result.data)
     res.status(200).json(result.data);
   } catch (error) {
-      console.error('analytics :: months-sum/:startDate/:endDate', error);
+      console.error('api-error:: analytics :: months-sum/:startDate/:endDate', error);
       res.status(500).send(error);
   } 
 })

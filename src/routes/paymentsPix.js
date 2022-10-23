@@ -6,7 +6,7 @@ router.get('/juno/webhook', async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*");   
       res.status(200).json({});
     } catch (error) {
-      console.error('paymentsPix :: juno/webhook', error);
+      console.error('api-error:: paymentsPix :: juno/webhook', error);
       res.status(500).send(error);
     }    
 });

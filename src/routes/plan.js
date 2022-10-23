@@ -19,7 +19,7 @@ router.post('/', authorization(), async (req, res) => {
         res.status(201).json(plan);
       }
     } catch (error) {
-      console.error('plan :: post', error);
+      console.error('api-error:: plan :: post', error);
       res.status(500).send(error);
     }
   });
@@ -30,7 +30,7 @@ router.get('/:_id', authorization(), async (req, res, next) => {
         res.setHeader("Access-Control-Allow-Origin", "*");  
         res.status(200).json(plan); 
       } catch (error) {
-        console.error('paymentsPix :: get _id', error);
+        console.error('api-error:: paymentsPix :: get _id', error);
         res.status(500).send(error);
       }    
 });
@@ -42,7 +42,7 @@ router.get('', authorization(), async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*");   
       res.status(200).json(plans); 
     } catch (error) {
-      console.error('plan :: get-all', error);
+      console.error('api-error:: plan :: get-all', error);
       res.status(500).send(error);
     }    
 });

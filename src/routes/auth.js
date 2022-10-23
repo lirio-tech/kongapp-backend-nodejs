@@ -47,8 +47,8 @@ router.post('/signup', authorization(), async (req, res) => {
       res.setHeader("Access-Control-Allow-Origin", "*"); 
       res.status(201).json(user);
     } catch (error) {
-      console.error('User save Fail...');
-      console.error('auth :: signup', error);
+      console.error('api-error:: User save Fail...');
+      console.error('api-error:: auth :: signup', error);
       res.status(500).send(error);
     }
 });
@@ -62,8 +62,8 @@ router.patch('/recovery', async (req, res) => {
     await User.updateOne({ _id: rpass.userId }, { password: req.body.pw }).exec();
     res.status(200).json({message:''});
   } catch (error) {
-    console.error('User Recovery Fail...'); 
-    console.error('auth :: recovery', error);
+    console.error('api-error:: User Recovery Fail...'); 
+    console.error('api-error:: auth :: recovery', error);
     res.status(500).send(error); 
   }
 });
@@ -129,7 +129,7 @@ router.post('/signup/company', async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*"); 
     res.status(201).json(responseSignup);
   } catch (error) {
-    console.error('auth :: signup/company', error);
+    console.error('api-error:: auth :: signup/company', error);
     res.status(500).send(error);
   }
 });
@@ -169,7 +169,7 @@ router.post('/signin', async (req, res) => {
           const company = await Company.findOne({_id: user.company}).exec();
           res.status(200).json({ auth: true, token: token, user: user, company: company });
     } catch (error) {
-      console.error('auth :: signin', error);
+      console.error('api-error:: auth :: signin', error);
       res.status(500).send(error);
     }
 });
@@ -204,7 +204,7 @@ router.post('/_/v2/signin', async (req, res) => {
         const company = await Company.findOne({_id: user.company}).exec();
         res.status(200).json({ auth: true, token: token, user: user, company: company });
   } catch (error) {
-    console.error('auth :: signin', error);
+    console.error('api-error:: auth :: signin', error);
     res.status(500).send(error);
   }
 });

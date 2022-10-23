@@ -17,7 +17,7 @@ router.get('', authorization(), async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*");   
       res.status(200).json(payments);      
     } catch (error) {
-      console.error('paymentsHistoric :: get-by-company', error);
+      console.error('api-error:: paymentsHistoric :: get-by-company', error);
       res.status(500).send(error);
     }    
 });
@@ -29,7 +29,7 @@ router.get('/all', authorization(), async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*");   
       res.status(200).json(payments);
     } catch (error) {
-      console.error('paymentsHistoric :: all', error);
+      console.error('api-error:: paymentsHistoric :: all', error);
       res.status(500).send(error);
     }    
 });

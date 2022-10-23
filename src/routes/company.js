@@ -155,7 +155,7 @@ router.post('/', authorization(), async (req, res) => {
         res.status(201).json(company);
       }
     } catch (error) {
-      console.error('company :: post', error);
+      console.error('api-error:: company :: post', error);
       res.status(500).send(error);
     }
 });
@@ -200,7 +200,7 @@ router.patch('/:_id/services/:serviceType', authorization(), async (req, res) =>
           res.status(200).json(company.services);
       }
   } catch(error) {
-    console.error('company :: patch :_id/services', error);
+    console.error('api-error:: company :: patch :_id/services', error);
     res.status(500).send(error);    
   }
 })
@@ -225,7 +225,7 @@ router.post('/:_id/services', authorization(), async (req, res) => {
       await Company.updateOne({_id: req.params._id }, { services: company.services });
       res.status(200).json(company.services);
   } catch(error) {
-    console.error('company :: patch :_id/services', error);
+    console.error('api-error:: company :: patch :_id/services', error);
     res.status(500).send(error);    
   }
 })
@@ -253,7 +253,7 @@ router.delete('/:_id/services/:serviceType', authorization(), async (req, res) =
 
       res.status(200).json(company.services);
   } catch(error) {
-    console.error('company :: patch :_id/services', error);
+    console.error('api-error:: company :: patch :_id/services', error);
     res.status(500).send(error);    
   }
 })
@@ -265,7 +265,7 @@ router.get('/:_id', authorization(), async (req, res, next) => {
         const company = await Company.findOne({ '_id': ObjectId(req.params._id) });
         res.status(200).json(company); 
       } catch (error) {
-        console.error('company :: get :_id', error);
+        console.error('api-error:: company :: get :_id', error);
         res.status(500).send(error);
       }    
 });
@@ -276,7 +276,7 @@ router.get('', authorization(), async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*");  
       res.status(200).json(company); 
     } catch (error) {
-      console.error('company :: get-all', error);
+      console.error('api-error:: company :: get-all', error);
       res.status(500).send(error);
     }    
 });
@@ -287,7 +287,7 @@ router.delete('/:_id', authorization(), async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*"); 
       res.status(204).json({'message': 'Deleteado'}); 
     } catch (error) {
-      console.error('company :: delete-by-id', error);
+      console.error('api-error:: company :: delete-by-id', error);
       res.status(500).send(error);
     }    
 }); 
@@ -316,7 +316,7 @@ router.post('/plan-custom', authorization(), async (req, res, next) => {
 
     res.status(201).json(planCustomCompany); 
   } catch(error) {
-    console.error('company :: plan-custom', error);
+    console.error('api-error:: company :: plan-custom', error);
     res.status(500).send(error);    
   }
 });
@@ -334,7 +334,7 @@ router.patch('/:_id/payment-types', authorization(), async (req, res) => {
       await Company.updateOne({_id: req.params._id }, { cardRate: cardRate, pixCopyPast: pixCopyPast });
       res.status(200).json({ cardRate: cardRate });
   } catch(error) {
-    console.error('company :: /:_id/payment-types', error);
+    console.error('api-error:: company :: /:_id/payment-types', error);
     res.status(500).send(error);    
   }
 })

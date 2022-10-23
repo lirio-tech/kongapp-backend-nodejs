@@ -86,7 +86,7 @@ router.post('', authorization(), async (req, res) => {
       const schedule = await new Schedule(scheduleNew).save();  
       res.status(200).json(schedule); 
     } catch (error) {
-      console.error('schedules :: post', error);
+      console.error('api-error:: schedules :: post', error);
       res.status(500).send(error);
     }
 });
@@ -159,7 +159,7 @@ router.put('/:_id', authorization(), async (req, res) => {
       await Schedule.updateOne({_id: schedule._id}, scheduleUpdate);
       res.status(200).json(req.body); 
     } catch (error) {
-      console.error('schedules :: put _id', error);
+      console.error('api-error:: schedules :: put _id', error);
       res.status(500).send(error);
     }
 });
@@ -245,7 +245,7 @@ router.put('/:_id/confirm', authorization(), async (req, res) => {
       await Schedule.updateOne({_id: schedule._id}, requested);
       res.status(200).json(req.body); 
     } catch (error) {
-      console.error('schedules :: put _id', error);
+      console.error('api-error:: schedules :: put _id', error);
       res.status(500).send(error);
     }
 });
@@ -282,7 +282,7 @@ router.get('/:dateStart/:dateEnd', authorization(), async (req, res) => {
         res.status(200).json(schedules);        
       }
     } catch (error) {
-      console.error('schedules :: get :dateStart/:dateEnd', error);
+      console.error('api-error:: schedules :: get :dateStart/:dateEnd', error);
       res.status(500).send(error);
     }
 });
@@ -311,7 +311,7 @@ router.delete('/:_id', authorization(), async (req, res) => {
       return;      
     }
   } catch (error) {
-    console.error('schedules :: delete _id', error);
+    console.error('api-error:: schedules :: delete _id', error);
     res.status(500).send(error);
   }
 });
@@ -373,7 +373,7 @@ router.post('/v2/:_id/:paymentType', authorization(), async (req, res) => {
           res.status(orderSaved.status).json({message: orderSaved.message});   
       }
   } catch (error) {
-      console.error('schedules :: post _id/:paymentType', error);
+      console.error('api-error:: schedules :: post _id/:paymentType', error);
       res.status(500).send(error);
   }
 });
@@ -489,7 +489,7 @@ router.get('/v2-prior-next', authorization(), async (req, res) => {
     console.log('list',list.length)
     res.status(200).json(list); 
   } catch (error) {
-    console.error('schedules :: get prior-next', error);
+    console.error('api-error:: schedules :: get prior-next', error);
     res.status(500).send(error);
   }
 });
@@ -728,7 +728,7 @@ router.post('/site', async (req, res) => {
 
       res.status(200).json(schedule);
     } catch (error) {
-      console.error('schedules :: post', error);
+      console.error('api-error:: schedules :: post', error);
       res.status(500).send(error);
     }
 });
@@ -765,7 +765,7 @@ router.get('/_/site/:companyId', async (req, res) => {
     }
     res.status(200).json(schedulesSite); 
   } catch (error) {
-    console.error('schedules :: get :dateStart/:dateEnd', error);
+    console.error('api-error:: schedules :: get :dateStart/:dateEnd', error);
     res.status(500).send(error);
   }
 });

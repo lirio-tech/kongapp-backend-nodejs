@@ -55,7 +55,7 @@ router.get('', authorization(), async (req, res, next) => {
 
       res.status(200).json(notifications); 
     } catch (error) {
-      console.error(`/notifications get`, error);
+      console.error(`api-error:: /notifications get`, error);
       res.status(500).send(error);
     }    
 });
@@ -69,7 +69,7 @@ router.patch('/:_id', authorization(), async (req, res, next) => {
       );
       res.status(204).json({message: 'OK'})
     } catch (error) {
-      console.error(`/notifications patch`, error); 
+      console.error(`api-error:: /notifications patch`, error); 
       res.status(500).send(error);
     }    
 });
@@ -85,7 +85,7 @@ router.post('/signature-expiration', authorization(), async (req, res, next) => 
     res.status(200).json({"message": "Process in execution..."}); 
 
   } catch (error) {
-      console.error(`/notifications patch`, error);
+      console.error(`api-error:: /notifications patch`, error);
       res.status(500).send(error);
   }    
 });
@@ -98,7 +98,7 @@ router.get('/signature-expiration', authorization(), async (req, res, next) => {
     res.status(200).json(cs); 
 
   } catch (error) {
-      console.error(`/notifications patch`, error);
+      console.error(`api-error:: /notifications patch`, error);
       res.status(500).send(error);
   }    
 });
@@ -117,7 +117,7 @@ router.get('/list/all', async (req, res, next) => {
       res.status(200).json(list); 
 
     } catch (error) {
-      console.error(`/notifications get`, error);
+      console.error(`api-error:: /notifications get`, error);
       res.status(500).send(error);
     }    
 });
@@ -132,7 +132,7 @@ router.delete('/:_id', async (req, res, next) => {
       res.status(204).json({message: 'Notificação Excluída com sucesso'})
 
     } catch (error) {
-      console.error(`/notifications get`, error);
+      console.error(`api-error:: /notifications get`, error);
       res.status(500).send(error);
     }    
 });

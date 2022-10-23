@@ -31,7 +31,7 @@ router.get('/v3/summary/:dateIni/:dateEnd', authorization(), async (req, res) =>
     await orderService.analyticsV3(req, res);
     //res.status(200).json(result.data);
   } catch(error) {
-      console.error('orders :: v3/summary/:dateIni/:dateEnd', error);
+      console.error('api-error:: orders :: v3/summary/:dateIni/:dateEnd', error);
       await orderService.analyticsV3(req, res);
   }
 });
@@ -54,7 +54,7 @@ router.get('/v4/summary/:dateIni/:dateEnd', authorization(), async (req, res) =>
     await orderService.analyticsV4(req, res);
     //res.status(200).json(result.data);
   } catch(error) {
-      console.error('orders :: v4/summary/:dateIni/:dateEnd', error);
+      console.error('api-error:: orders :: v4/summary/:dateIni/:dateEnd', error);
       await orderService.analyticsV4(req, res);
   }
 });
@@ -97,7 +97,7 @@ router.get('/v2/:dateIni/:dateEnd', authorization(), async (req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*"); 
     res.status(200).json(orders); 
   } catch (error) { 
-      console.error('orders :: v2/:dateIni/:dateEnd', error);
+      console.error('api-error:: orders :: v2/:dateIni/:dateEnd', error);
       res.status(500).send(error);
   }    
 });
@@ -118,7 +118,7 @@ router.get('/:_id', authorization(), async (req, res, next) => {
         res.setHeader("Access-Control-Allow-Origin", "*");  
         res.status(200).json(order); 
       } catch (error) {
-        console.error('orders :: get _id', error);
+        console.error('api-error:: orders :: get _id', error);
         res.status(500).send(error);
       }    
 });
@@ -136,7 +136,7 @@ router.delete('/:_id', authorization(), async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*"); 
       res.status(204).json({'message': 'Deletado'}); 
     } catch (error) {
-      console.error('orders :: delete _id', error);
+      console.error('api-error:: orders :: delete _id', error);
       res.status(500).send(error);
     }    
 });

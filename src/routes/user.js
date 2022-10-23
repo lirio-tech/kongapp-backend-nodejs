@@ -93,8 +93,7 @@ router.patch('/:_id', authorization(), async (req, res) => {
       console.log('User updated success!!!');
       res.status(200).json({message: 'User updated success!!!'}); 
     } catch (error) {
-      console.error('users :: patch _id', error);
-
+      console.error('api-error:: users :: patch _id', error);
       res.status(500).send(error);
     }
 });
@@ -118,7 +117,7 @@ router.patch('/:_id/change-password', authorization(), async (req, res) => {
       );
     res.status(200).json({message: 'Senha Alterada com Sucesso!!!'});
   } catch (error) {
-    console.error('users :: patch _id/change-password', error);
+    console.error('api-error:: users :: patch _id/change-password', error);
     res.status(500).json({ message: 'Erro ao alterar senha' }); 
   }
 });
@@ -144,7 +143,7 @@ router.post('/:_id/recovery', authorization(), async (req, res) => {
             link: `https://app.wiskritorio.com.br/#/public/recovery/${rpass.code}`
           }); 
   } catch (error) {
-    console.error('users :: post _id/recovery', error);
+    console.error('api-error:: users :: post _id/recovery', error);
     res.status(500).send(error); 
   }
 });
@@ -163,7 +162,7 @@ router.patch('/recovery/:code', async (req, res) => {
     await RecoveryPassword.updateOne({ _id: rpass._id }, { code: rpass.code });
     res.status(200).json({ usr: user, cd: rpass });
   } catch (error) {
-    console.error('users :: patch recovery/:code', error);
+    console.error('api-error:: users :: patch recovery/:code', error);
     res.status(500).send(error);
   }
 });
@@ -178,7 +177,7 @@ router.patch('/:_id/configuration', authorization(), async (req, res) => {
     );    
     res.status(200).json({message: 'Atualizado com sucesso'});
   } catch (error) {
-    console.error('users :: patch _id/configuration', error);
+    console.error('api-error:: users :: patch _id/configuration', error);
     res.status(500).send(error); 
   }
 });
@@ -216,7 +215,7 @@ router.patch('/:_id/become-admin', authorization(), async (req, res) => {
     
 
   } catch (error) {
-    console.error('users :: patch _id/become-admin', error);
+    console.error('api-error:: users :: patch _id/become-admin', error);
     res.status(500).send(error);
   }
 });
@@ -238,7 +237,7 @@ router.patch('/:_id/become-common', authorization(), async (req, res) => {
     res.status(200).json({message: 'User updated success!!!'}); 
     
   } catch (error) {
-    console.error('users :: patch _id/become-common', error);
+    console.error('api-error:: users :: patch _id/become-common', error);
     res.status(500).send(error);
   }
 });
@@ -250,7 +249,7 @@ router.get('/:username', async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*");  
       res.status(200).json(user); 
     } catch (error) {
-      console.error('users :: get username', error);
+      console.error('api-error:: users :: get username', error);
       res.status(500).send(error);
     }    
 });
@@ -262,7 +261,7 @@ router.get('/_/:_id', async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*");  
       res.status(200).json(user); 
     } catch (error) {
-      console.error('users :: get /_/_id', error);
+      console.error('api-error:: users :: get /_/_id', error);
       res.status(500).send(error);
     }    
 });
@@ -289,7 +288,7 @@ router.get('/', authorization(), async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*");  
       res.status(200).json(user); 
     } catch (error) {
-      console.error('users :: get-with-enabledType', error);
+      console.error('api-error:: users :: get-with-enabledType', error);
       res.status(500).send(error);
     }    
 });
@@ -315,7 +314,7 @@ router.get('/v2/company/:companyId', authorization(), async (req, res, next) => 
       res.setHeader("Access-Control-Allow-Origin", "*");  
       res.status(200).json(user); 
     } catch (error) {
-      console.error('users :: get-with-enabledType', error);
+      console.error('api-error:: users :: get-with-enabledType', error);
       res.status(500).send(error);
     }    
 });
@@ -351,7 +350,7 @@ router.get('/site/company/:companyId', async (req, res, next) => {
       }
       res.status(200).json(usersSite); 
     } catch (error) {
-      console.error('users :: get-with-enabledType', error);
+      console.error('api-error:: users :: get-with-enabledType', error);
       res.status(500).send(error);
     }    
 });
@@ -387,7 +386,7 @@ router.patch('/update/commission', authorization(), async (req, res, next) => {
       res.setHeader("Access-Control-Allow-Origin", "*");  
       res.status(200).json(users);
     } catch (error) {
-      console.error('users :: patch update/commission', error);
+      console.error('api-error:: users :: patch update/commission', error);
       res.status(500).send(error);
     }    
 });
@@ -400,12 +399,11 @@ router.get('/update/user/allow/edit/order', async (req, res, next) => {
         await User.updateOne({_id: u._id }, { $set: { allowEditOrder: false } });
       });
       await Promise.all(promises);
-      console.error(`Updated...`);
       let users_ = await User.find();
       res.setHeader("Access-Control-Allow-Origin", "*");  
       res.status(200).json(users_);
     } catch (error) {
-      console.error('users :: patch update/user/allow/edit/order', error);
+      console.error('api-error:: users :: patch update/user/allow/edit/order', error);
       res.status(500).send(error);
     }    
 });

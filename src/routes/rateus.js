@@ -12,7 +12,7 @@ router.post('', async (req, res) => {
       }       
       res.status(200).json(rateUs); 
     } catch (error) {
-      console.error('rateus :: post', error);
+      console.error('api-error:: rateus :: post', error);
       res.status(500).send(error);
     }
 });
@@ -23,7 +23,7 @@ router.get('/', authorization(), async (req, res) => {
       const rates = await RateUs.find({});
       res.status(200).json(rates); 
     } catch (error) {
-      console.error('rateus :: get', error);
+      console.error('api-error:: rateus :: get', error);
       res.status(500).send(error);
     }
 });

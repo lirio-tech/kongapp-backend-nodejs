@@ -24,7 +24,7 @@ router.get('/', authorization(), async (req, res, next) => {
       await Promise.all(promises);
       res.status(200).json(result);
     } catch (error) {
-      console.error('usersBalance :: get by-company', error);
+      console.error('api-error:: usersBalance :: get by-company', error);
       res.status(500).send(error);
     }    
 });
@@ -36,7 +36,7 @@ router.get('/user/:userId', authorization(), async (req, res, next) => {
     const userBalance = await UserBalance.findOne({ 'user._id': req.params.userId });
     res.status(200).json(userBalance);
   } catch (error) { 
-    console.error('usersBalance :: user/:userId', error);
+    console.error('api-error:: usersBalance :: user/:userId', error);
     res.status(500).send(error);
   }    
 });
@@ -49,7 +49,7 @@ router.get('/user/:userId/detail', authorization(), async (req, res, next) => {
     res.status(200).json(userBalanceDetail); 
     return;
   } catch (error) { 
-    console.error('usersBalance :: user/:userId/detail', error);
+    console.error('api-error:: usersBalance :: user/:userId/detail', error);
     res.status(500).send(error);
   }    
 });
@@ -88,7 +88,7 @@ router.post('', authorization(), async (req, res, next) => {
     res.status(200).json(userBalanceDetail);
  
   } catch (error) { 
-    console.error('usersBalance :: post', error);
+    console.error('api-error:: usersBalance :: post', error);
     res.status(500).send(error);
   }    
 });
@@ -117,7 +117,7 @@ router.delete('/:userBalanceId/:userBalanceDetailId', authorization(), async (re
     }
  
   } catch (error) { 
-    console.error('usersBalance :: deletet', error);
+    console.error('api-error:: usersBalance :: deletet', error);
     return res.status(500).send(error);
   }    
 });

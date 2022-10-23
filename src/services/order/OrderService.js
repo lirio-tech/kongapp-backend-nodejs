@@ -185,7 +185,7 @@ module.exports.orderService = () => {
               res.status(500).json({message: `Nao identificado o tipo do usuario`});        
             }
           } catch (error) {
-              console.error(error);
+              console.error(`api-error:: OrderService.analyticsV3 `, error);
               res.status(500).send(error);
           } 
         },       
@@ -367,7 +367,7 @@ module.exports.orderService = () => {
               res.status(500).json({message: `Nao identificado o tipo do usuario`});        
             }
           } catch (error) {
-              console.error(error);
+              console.error(`api-error:: OrderService.analyticsV3`, error);
               res.status(500).send(error);
           } 
         },           
@@ -557,7 +557,7 @@ module.exports.orderService = () => {
               }                   
             }
           } catch (error) {
-            console.error('OrderService :: save', error);
+            console.error('api-error:: OrderService.save', error);
             return {
               isValid: false,
               status: 500,
@@ -761,7 +761,7 @@ module.exports.orderService = () => {
               }                   
             }
           } catch (error) {
-            console.error('OrderService :: save', error);
+            console.error('api-error:: OrderService.save9', error);
             return {
               isValid: false,
               status: 500,

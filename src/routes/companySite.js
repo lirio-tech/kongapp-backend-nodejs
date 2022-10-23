@@ -59,7 +59,7 @@ router.put('/:_idCompany/site-info', authorization(), async (req, res) => {
       res.status(201).json(companySt);
     }
   } catch (error) {
-    console.error('company :: put site-info', error);
+    console.error('api-error:: company :: put site-info', error);
     res.status(500).send(error);
   }
 });
@@ -93,7 +93,7 @@ router.patch('/:_idCompany/site-info/:_idSite', authorization(), async (req, res
       console.log('CompanySite updated success!!!');
       return res.status(200).json(companySite);
   } catch (error) {
-    console.error('company :: put site-info', error);
+    console.error('api-error:: company :: put site-info', error);
     res.status(500).send(error);
   }
 });
@@ -106,7 +106,7 @@ router.get('/:_idCompany/site-info', authorization(), async (req, res) => {
     let site = await CompanySite.findOne({ companyId: ObjectId(companyId) });
     return res.status(200).json(site);
   } catch (error) {
-    console.error('company :: get site-info', error);
+    console.error('api-error:: company :: get site-info', error);
     return res.status(500).send(error);
   }
 });
@@ -144,7 +144,7 @@ router.get('/site-info/discovery/origin/app', async (req, res) => {
     }
     
   } catch (error) {
-    console.error('company :: get /site-info/discovery/origin/app', error);
+    console.error('api-error:: company :: get /site-info/discovery/origin/app', error);
     return res.status(500).send(error);
   }
 });
@@ -158,7 +158,7 @@ router.get('/:arroba/site-info/arroba', async (req, res) => {
     let company = await Company.findOne({ _id: ObjectId(site.companyId) });
     return res.status(200).json({ companySite: site, company: company });
   } catch (error) {
-    console.error('company :: get site-info-arroba', error);
+    console.error('api-error:: company :: get site-info-arroba', error);
     return res.status(500).send(error);
   }
 });
@@ -178,7 +178,7 @@ router.patch('/site-info/:_siteId/upload-cover', authorization(), async (req, re
       console.log('Upload Photo Cover - S3 success!!!');
       return res.status(200).json({urlImage: urlImage});  
   } catch (error) {
-    console.error('companySite :: patch Upload Photo S3', error);
+    console.error('api-error:: companySite :: patch Upload Photo S3', error);
     res.status(500).send(error);
   }
 });
@@ -207,7 +207,7 @@ router.patch('/site-info/:_siteId/upload-photo-gallery/:_photoGalleryId', author
       console.log('Upload Photo Gallery S3 success!!!');
       return res.status(200).json(photosGallery);
   } catch (error) {
-    console.error('companySite :: patch Upload Photo S3', error);
+    console.error('api-error:: companySite :: patch Upload Photo S3', error);
     res.status(500).send(error);
   }
 });
