@@ -22,6 +22,7 @@ module.exports.notifiers = () => {
               ) {
                 return [{
                   text: 'Seu plano vencerá amanhã, Renove agora mesmo e evite o bloqueio ;)',
+                  textColor: 'black',
                   link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
                   linkTitle: 'Renovar',
                   type: 'warning',
@@ -37,6 +38,7 @@ module.exports.notifiers = () => {
               ) {
                 return [{
                   text: 'Seu plano vence hoje, Renove agora mesmo :)',
+                  textColor: 'white',
                   link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
                   linkTitle: 'Renovar',
                   type: 'warning',
@@ -54,6 +56,7 @@ module.exports.notifiers = () => {
               ) {
                 return [{
                   text: 'Seu plano venceu ontem, Não se esqueça de renovar',
+                  textColor: 'white',
                   link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
                   linkTitle: 'Renovar',
                   type: 'warning',
@@ -63,6 +66,7 @@ module.exports.notifiers = () => {
             }                         
             return [{
                 text: 'Seu está vencido, renove e continue utilizando o APP',
+                textColor: 'white',
                 link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
                 linkTitle: 'Renovar',
                 type: 'warning',
