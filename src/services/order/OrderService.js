@@ -4,6 +4,7 @@ const User = require('../../models/User');
 const Company = require('../../models/Company');
 const UserBalanceDetail = require('../../models/UserBalanceDetail');
 const UserBalance = require('../../models/UserBalance');
+const notifiers = require('../../utils/notifiers').notifiers();
 const companyService = require('../../services/CompanyService.js').companyService();
 const planService = require('../../services/PlanService.js').planService();
 
@@ -199,18 +200,8 @@ module.exports.orderService = () => {
               console.log(`version-app=${req.headers['version']}, user=${user.username}, company=${company.shortName}, agent=${req.headers['user-agent']}`);
             }
 
-            let notify = [];
-            if(company.plan.dateEnd && new Date(company.plan.dateEnd) <= new Date()) {
-                message = {
-                  text: 'Seu plano venceu, Renove agora mesmo :)',
-                  link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
-                  linkTitle: 'Renovar',
-                  type: 'warning',
-                  closeable: true,
-                }
-                notify.push(message);
-            } 
-
+            let notify = notifiers.verifyIfhasNotificion(company)
+            
             if(user.type === 'administrator' || user.type === 'sys_admin') {
               const orders = await Order.aggregate([
                   {
@@ -375,7 +366,6 @@ module.exports.orderService = () => {
         async saveV8(order, userId, companyId) {
           try {
             order.company = companyId;
-            console.log('m=saveV8',order);
             
             const userLogged = await User.findOne({ '_id': userId });
             if(userLogged.disabled === true) {  
@@ -393,7 +383,6 @@ module.exports.orderService = () => {
             order.total = 0;
 
             for(let i in order.services) {
-                console.log(user.services);
                 const service = user.services.filter(it => it.type === order.services[i].type)[0];
                 if(!service) {
                   return this.getResultFalse(422, `${user.name} nao possui o service ${order.services[i].type}`);
@@ -457,8 +446,7 @@ module.exports.orderService = () => {
                 } 
               } 
             ])    
-        
-            console.log('total: === ', aggregateMonth)
+      
         
             if(company.plan.name !== 'Free') {
               if(companyService.isNotExpiredPlan(company, 2) === false) {
@@ -488,7 +476,6 @@ module.exports.orderService = () => {
             }
         
             let userBalance = await UserBalance.findOne({ 'user._id': order.user._id });
-            console.log('userBalance '+ order.user._id, userBalance); 
             
             if(order._id) {  
         
@@ -531,7 +518,6 @@ module.exports.orderService = () => {
               const orderSaved = await new Order(order).save();
         
               let balanceAdd = userBalance.balance + order.commission;
-              console.log('balanceAdd', balanceAdd);
               await UserBalance.updateOne(  
                 { 'user._id': orderSaved.user._id }, 
                 { balance: balanceAdd } 
@@ -570,7 +556,6 @@ module.exports.orderService = () => {
         async saveV9(order, userId, companyId) {
           try {
             order.company = companyId;
-            console.log('m=saveV9',order);
             
             const userLogged = await User.findOne({ '_id': userId });
             if(userLogged.disabled === true) {  
@@ -593,7 +578,6 @@ module.exports.orderService = () => {
             order.total = 0;
             
             for(let i in order.services) {
-                console.log(user.services);
                 const service = user.services.filter(it => it.type === order.services[i].type)[0];
                 if(!service) {
                   return this.getResultFalse(422, `${user.name} não possui o serviço ${order.services[i].type}`);
@@ -613,7 +597,6 @@ module.exports.orderService = () => {
             order.cardRateValueDiscount = order.total * order.cardRate / 100;
             order.netTotal = order.total - order.cardRateValueDiscount;
             order.totalCompany -= order.cardRateValueDiscount
-            console.log(`discountRate=${order.cardRateValueDiscount}, netTotal=${order.netTotal}`);
 
             let today = new Date(); 
             let dateRequest = new Date(order.date);
@@ -661,8 +644,6 @@ module.exports.orderService = () => {
               } 
             ])    
         
-            console.log('total: === ', aggregateMonth)
-        
             if(company.plan.name !== 'Free') {
               if(companyService.isNotExpiredPlan(company, 2) === false) {
                 if(company.downgradePlanFree === true) {
@@ -692,7 +673,6 @@ module.exports.orderService = () => {
             }
         
             let userBalance = await UserBalance.findOne({ 'user._id': order.user._id });
-            console.log('userBalance '+ order.user._id, userBalance); 
             
             if(order._id) {  
         
@@ -735,7 +715,6 @@ module.exports.orderService = () => {
               const orderSaved = await new Order(order).save();
         
               let balanceAdd = userBalance.balance + order.commission;
-              console.log('balanceAdd', balanceAdd);
               await UserBalance.updateOne(  
                 { 'user._id': orderSaved.user._id }, 
                 { balance: balanceAdd } 
