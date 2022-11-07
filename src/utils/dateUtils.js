@@ -19,7 +19,7 @@ module.exports.dateUtils = () => {
             return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
         },      
         differenceOfTwoDates(dateLesser, dateGreater) {
-            return (dateGreater.getTime() - dateLesser.getTime()) / (1000 * 3600 * 24);       
+            return Math.trunc( (dateGreater.getTime() - dateLesser.getTime()) / (1000 * 3600 * 24) );       
         }  
     } 
 }
