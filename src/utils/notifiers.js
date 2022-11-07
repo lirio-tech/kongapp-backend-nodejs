@@ -1,3 +1,5 @@
+const dateUtils = require('./utils/dateUtils').dateUtils();
+
 module.exports.notifiers = () => {
     return {
         verifyIfhasNotificion(company) {
@@ -65,7 +67,7 @@ module.exports.notifiers = () => {
                 }]
             }                         
             return [{
-                text: 'Seu está vencido, renove e continue utilizando o APP',
+                text: `Seu Plano está vencido há ${dateUtils.differenceOfTwoDates(dueDate, today)} dias, renove e continue utilizando o APP`,
                 textColor: 'white',
                 link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
                 linkTitle: 'Renovar',
