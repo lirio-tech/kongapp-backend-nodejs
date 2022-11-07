@@ -17,6 +17,9 @@ module.exports.dateUtils = () => {
             console.log(date.setDate(date.getDate()+_day));
             const [day, month, year] = date.toLocaleString('pt-BR').substring(0,10).split('/');
             return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-        },        
+        },      
+        differenceOfTwoDates(dateLesser, dateGreater) {
+            return Math.trunc( (dateGreater.getTime() - dateLesser.getTime()) / (1000 * 3600 * 24) );       
+        },  
     } 
 }
