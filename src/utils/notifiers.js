@@ -1,4 +1,4 @@
-const dateUtils = require('./utils/dateUtils').dateUtils();
+const dateUtils = require('./dateUtils').dateUtils();
 
 module.exports.notifiers = () => {
     return {
