@@ -23,7 +23,7 @@ module.exports.notifiers = () => {
                 dueDate.getDate() === tomorrow.getDate()
               ) {
                 return [{
-                  text: 'Seu plano vencerá amanhã, Renove agora mesmo e evite o bloqueio ;)',
+                  text: 'Seu plano vencerá amanhã. Renove agora mesmo e evite o bloqueio ;)',
                   textColor: 'black',
                   link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
                   linkTitle: 'Renovar',
@@ -39,7 +39,7 @@ module.exports.notifiers = () => {
                 dueDate.getDate() === today.getDate()
               ) {
                 return [{
-                  text: 'Seu plano vence hoje, Renove agora mesmo :)',
+                  text: 'Seu plano vence hoje. Renove agora mesmo :)',
                   textColor: 'white',
                   link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
                   linkTitle: 'Renovar',
@@ -57,7 +57,7 @@ module.exports.notifiers = () => {
                 dueDate.getDate() === yesterday.getDate()
               ) {
                 return [{
-                  text: 'Seu plano venceu ontem, Não se esqueça de renovar',
+                  text: 'Seu plano venceu ontem. Não se esqueça de renovar',
                   textColor: 'white',
                   link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
                   linkTitle: 'Renovar',
