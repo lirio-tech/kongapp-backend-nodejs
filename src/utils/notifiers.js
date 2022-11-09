@@ -23,7 +23,7 @@ module.exports.notifiers = () => {
                 dueDate.getDate() === tomorrow.getDate()
               ) {
                 return [{
-                  text: 'Seu plano vencerá amanhã. Renove agora mesmo e evite o bloqueio ;)',
+                  text: 'Seu plano vencerá amanhã. Renove agora mesmo e continue gerenciando tudo na palma da sua mão ;)',
                   textColor: 'black',
                   link: company.plan.name === 'Smart' ? '/public/simulator-plan' : `/admin/payment/${company.plan.name}`,
                   linkTitle: 'Renovar',
