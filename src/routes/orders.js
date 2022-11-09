@@ -13,29 +13,6 @@ const btoa = require('btoa');
 const { ObjectId } = require('mongodb');
 //const basic_encoded = btoa(`${process.env.AUTH_USER}:${process.env.AUTH_PASS}`)
 
-router.get('/v3/summary/:dateIni/:dateEnd', authorization(), async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");   
-  try {
-    // TODO Bug no Kotlin
-    // let url = `${process.env.BACKEND_API}/api/orders/summary/${req.params.dateIni}/${req.params.dateEnd}`;
-    // let result = await axios.get(
-    //       url,
-    //       { headers: { 
-    //           'Content-Type': 'application/json',
-    //           'companyId': req.headers['company'],
-    //           'userId': req.userId,
-    //           'Authorization': `Basic ${basic_encoded}`  
-    //         }}
-    //     ); 
-    //     console.log('kotlin-backend-api', 'sucesso');
-    await orderService.analyticsV3(req, res);
-    //res.status(200).json(result.data);
-  } catch(error) {
-      console.error('api-error:: orders :: v3/summary/:dateIni/:dateEnd', error);
-      await orderService.analyticsV3(req, res);
-  }
-});
-
 router.get('/v4/summary/:dateIni/:dateEnd', authorization(), async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");   
   try {
