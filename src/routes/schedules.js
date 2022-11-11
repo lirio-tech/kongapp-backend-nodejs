@@ -9,6 +9,7 @@ const companyService = require('../services/CompanyService.js').companyService()
 const dateUtils = require('../utils/dateUtils').dateUtils();
 const userService = require('../services/UserService').userService();
 const CompanySite = require('../models/CompanySite');
+const saveOrderUsecase = require('../bounded-context/order/usecases/SaveOrderUsecase').saveOrderUsecase();
 const notificationSaveNewScheduleUsecase = require('../bounded-context/notification/usecases/NotificationSaveNewScheduleUsecase').notificationSaveNewScheduleUsecase();
 const messageLabels = require('../services/validation/Message').messageLabels();
 
@@ -356,7 +357,7 @@ router.post('/v2/:_id/:paymentType', authorization(), async (req, res) => {
         company: schedule.companyId,
         cardRate: req.query.cardRate ? req.query.cardRate : 0
       };
-      const orderSaved = await orderService.saveV8(order, req.userId, req.headers['company']);
+      const orderSaved = await saveOrderUsecase.saveV10(order, req.userId, req.headers['company'])
       console.log('orderSaved', orderSaved)
       if(orderSaved.isValid) { 
           await Schedule.updateOne(
