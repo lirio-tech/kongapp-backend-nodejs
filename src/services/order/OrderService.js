@@ -106,6 +106,9 @@ module.exports.orderService = () => {
                   company: companyFormat.format(company),
                   notifications: notify
               }
+
+              console.log(result) 
+
               res.status(200).json(result);  
             } 
             else if(user.type === 'hairdresser') {
@@ -180,7 +183,7 @@ module.exports.orderService = () => {
               const result = {
                 user: user,
                 orders: orders,
-                company: company,
+                company: companyFormat.format(company),
                 notifications: notify
               }
               res.status(200).json(result);     

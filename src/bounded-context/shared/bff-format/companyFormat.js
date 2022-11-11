@@ -1,18 +1,18 @@
-const dateUtils = require('../../../utils/dateUtils').dateUtils();
+const dateFormat = require('./dateFormat/dateFormat').dateFormat();
 
 module.exports.companyFormat = () => {
     return {             
-        async formart(company) {
+        format(company) {
             return {  
                 name: company.name,
                 shortName: company.shortName,
                 path: company.path,
                 plan: {
                     name: company.plan.name,
-                    dateStarted: dateUtils.dateToStringPtBR(new Date(company.plan.dateEnd)),
-                    dateStartedBR: company.plan.dateEnd,
                     dateStarted: company.plan.dateStarted,
+                    dateStartedBR: dateFormat.dateToStringPtBR(new Date(company.plan.dateStarted)),
                     dateEnd: company.plan.dateEnd,   
+                    dateEndBR: dateFormat.dateToStringPtBR(new Date(company.plan.dateEnd)),
                     amountUsers: company.plan.amountUsers,
                     amountUsersAdmin: company.plan.amountUsersAdmin,
                     amountUsersCommon: company.plan.amountUsersCommon,

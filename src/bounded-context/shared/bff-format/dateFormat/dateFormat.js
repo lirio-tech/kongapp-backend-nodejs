@@ -12,10 +12,10 @@ module.exports.dateFormat = () => {
         },    
         // BR Formats            
         dateTimeToStringPtBR(date) {
-            return date.toLocaleString('pt-BR').substring(0,10)
+            return date.toLocaleString('pt-BR')
         },
         dateToStringPtBR(date) {
-            return date.toLocaleString('pt-BR')
+            return date.toLocaleString('pt-BR').substring(0,10)
         },        
     } 
 }

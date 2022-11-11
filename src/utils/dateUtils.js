@@ -20,6 +20,6 @@ module.exports.dateUtils = () => {
         },      
         differenceOfTwoDates(dateLesser, dateGreater) {
             return Math.trunc( (dateGreater.getTime() - dateLesser.getTime()) / (1000 * 3600 * 24) );       
-        }  
+        },  
     } 
 }
