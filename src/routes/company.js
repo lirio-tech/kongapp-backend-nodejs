@@ -14,6 +14,7 @@ const userService = require('../services/UserService').userService();
 
 router.patch('/v1/:_id/renovate/same/plan', authorization(), async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); 
+  console.log('/v1/:_id/renovate/same/plan', req.params._id)
   renovatePlanUsecase.renovate(ObjectId(req.params._id) ,ObjectId(req.userId))
   res.status(200).json(company);   
 })
