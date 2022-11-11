@@ -7,9 +7,16 @@ const authorization = require('../middleware/auth-middleware');
 const User = require('../models/User.js');
 const { ObjectId } = require('mongodb');
 const PlanCustomCompany = require('../models/PlanCustomCompany.js');
+const renovatePlanUsecase = require('../bounded-context/company/plan/RenovatePlanUsecase.js').renovatePlanUsecase();
 const notificationSaveSignaturePaidUsecase  = require('../bounded-context/notification/usecases/NotificationSaveSignaturePaidUsecase.js').notificationSaveSignaturePaid();
 const companyService = require('../services/CompanyService.js').companyService();
 const userService = require('../services/UserService').userService();
+
+router.patch('/v1/:_id/renovate-plan', authorization(), async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); 
+  renovatePlanUsecase.renovate(ObjectId(req.params._id) ,ObjectId(req.userId))
+  res.status(200).json(company);   
+})
 
 router.put('/:_id/upgrade/plan', authorization(), async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*"); 
@@ -76,7 +83,7 @@ router.put('/v2/:_id/upgrade/plan', authorization(), async (req, res) => {
     return;
   }
   
-  let company = await Company.findOne({_id:req.params._id}); 
+  let company = await Company.findOne({_id: req.params._id}); 
   company.planOld = company.plan;
 
   if(planApply.name === 'Smart' && 
