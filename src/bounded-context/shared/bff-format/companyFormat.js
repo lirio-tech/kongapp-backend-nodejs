@@ -4,6 +4,7 @@ module.exports.companyFormat = () => {
     return {             
         format(company) {
             return {  
+                id: company._id,
                 name: company.name,
                 shortName: company.shortName,
                 path: company.path,
