@@ -12,7 +12,7 @@ const notificationSaveSignaturePaidUsecase  = require('../bounded-context/notifi
 const companyService = require('../services/CompanyService.js').companyService();
 const userService = require('../services/UserService').userService();
 
-router.patch('/v1/:_id/renovate-plan', authorization(), async (req, res) => {
+router.patch('/v1/:_id/renovate/same/plan', authorization(), async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); 
   renovatePlanUsecase.renovate(ObjectId(req.params._id) ,ObjectId(req.userId))
   res.status(200).json(company);   
