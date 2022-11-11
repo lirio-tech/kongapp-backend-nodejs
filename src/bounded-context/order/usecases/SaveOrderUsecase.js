@@ -1,0 +1,204 @@
+const User = require('../../../models/User');
+const Company = require('../../../models/Company');
+const Order = require('../../../models/Order');
+const UserBalance = require('../../../models/UserBalance');
+const UserBalanceDetail = require('../../../models/UserBalanceDetail');
+const planService = require('../../../services/PlanService').planService();
+const blockingPlanOrderUsecase = require('../../company/plan/BlockingPlanOrderUsecase').blockingPlanOrderUsecase();
+
+module.exports.saveOrderUsecase = () => {
+    return {
+        getResultFalse(status, message, planName) {
+            return {
+              isValid: false,
+              status: status,
+              message: message,
+              plan: planName,
+              order: null
+            }
+        },            
+        async saveV10(order, userId, companyId) {
+            try {
+              order.company = companyId;
+              
+              const userLogged = await User.findOne({ '_id': userId });
+              if(userLogged.disabled === true) {  
+                  console.log('Usuario desabilitado!');
+                  return this.getResultFalse(401, 'Usuario desabilitado');
+              }
+          
+              const user = await User.findOne({ '_id': order.user._id });
+              order.user = user;
+  
+              if(!order.user.username) { 
+                console.log('Usuário Inválido', order.user);
+                return this.getResultFalse(422, 'Usuário desabilitado');
+              }             
+  
+              let company = await Company.findOne({ '_id': companyId });
+          
+              order.commission = 0;
+              order.totalCompany = 0;
+              order.total = 0;
+              
+              for(let i in order.services) {
+                  const service = user.services.filter(it => it.type === order.services[i].type)[0];
+                  if(!service) {
+                    return this.getResultFalse(422, `${user.name} não possui o serviço ${order.services[i].type}`);
+                  }
+                  order.services[i].percentCommission = service.percentCommission;
+                  order.services[i].priceCommission = order.services[i].price * service.percentCommission / 100;
+                  order.services[i].priceCompany = order.services[i].price - order.services[i].priceCommission;
+                  
+                  order.commission += order.services[i].priceCommission;
+                  order.totalCompany += order.services[i].priceCompany;
+                  order.total += order.services[i].price;
+              }
+  
+              if(order.paymentType !== 'card') { 
+                order.cardRate = 0;
+              }
+              order.cardRateValueDiscount = order.total * order.cardRate / 100;
+              order.netTotal = order.total - order.cardRateValueDiscount;
+              order.totalCompany -= order.cardRateValueDiscount
+  
+              let today = new Date(); 
+              let dateRequest = new Date(order.date);
+              if(dateRequest > today) {
+                return this.getResultFalse(422, 'Não permitido uma data futura');
+              }
+          
+              // TODO Bug
+              if(dateRequest.getMonth()-today.getMonth() <= -2) {
+                return this.getResultFalse(422, 'Não é permitido lançamento de mais de 1 Mês anterior');
+              }     
+          
+              let m = new Date();
+              let ini = new Date();
+              ini.setFullYear(m.getFullYear(), m.getMonth(), 1);
+              let end = new Date();
+              end.setFullYear(m.getFullYear(), m.getMonth()+1, 0);
+          
+              let monthStart = String(ini.getMonth()+1).padStart(2, "0");
+              let dayStart = String(ini.getDate()).padStart(2, "0");
+              let monthEnd = String(end.getMonth()+1).padStart(2, "0");
+              let dayEnd = String(end.getDate()).padStart(2, "0");
+              let period = {
+                firstDay: ini.getFullYear() + '-' + monthStart + '-' +dayStart,
+                lastDay: end.getFullYear() + '-' + monthEnd + '-' +dayEnd
+              }      
+          
+              const aggregateMonth = await Order.aggregate([
+                { 
+                  $match: 
+                    {
+                      date: {
+                        $gte: period.firstDay,
+                        $lte: period.lastDay
+                      },
+                      company: company._id
+                    }
+                },
+                { 
+                  $group: {
+                    _id: null,
+                    totalValue: { $sum: "$total" },
+                    count: { $sum: 1 }
+                  } 
+                } 
+              ])    
+          
+              if(blockingPlanOrderUsecase.block(company) === true) {
+                    const msg = 'Seu Plano está vencido, renove seu plano agora mesmo ou entre em contato conosco!';
+                    console.log('Plan Expired', msg); 
+                    return this.getResultFalse(412, msg, company.plan.name);
+              }
+
+              let total = aggregateMonth.length > 0 ? aggregateMonth[0].totalValue : 0;
+          
+              let resultPlan = planService.validatePlanNewOrderService(company, total); 
+              if(resultPlan.isValid === false) { 
+                return this.getResultFalse(412, resultPlan.message, resultPlan.plan) ;
+              }
+          
+              let userBalance = await UserBalance.findOne({ 'user._id': order.user._id });
+              
+              if(order._id) {  
+          
+                const orderFind = await Order.findOne({_id: order._id });
+                // Update
+                let orderUpdated = await Order.updateOne({_id: order._id }, order);
+           
+                const balanceUpdate = userBalance.balance + order.commission - orderFind.commission;
+                await UserBalance.updateOne( 
+                  { 'user._id': order.user._id }, 
+                  { balance: balanceUpdate }
+                );  
+  
+                order.updatedByUserId = userId;
+           
+                await UserBalanceDetail.updateOne( 
+                  { 
+                    orderId: order._id
+                  },   
+                  {
+                    userId: order.user._id,
+                    value: order.commission,
+                    date: order.date,
+                    description: order.customer.name 
+                  }
+                )
+          
+                console.log('Order updated success!!!');
+                return {
+                  isValid: true,
+                  status: 200,
+                  message: 'Order updated success!!!',
+                  plan: company.plan.name,
+                  order: orderUpdated
+                }                          
+              } else {
+                // Novo
+                delete order._id;
+                order.createdByUserId = userId;
+                const orderSaved = await new Order(order).save();
+          
+                let balanceAdd = userBalance.balance + order.commission;
+                await UserBalance.updateOne(  
+                  { 'user._id': orderSaved.user._id }, 
+                  { balance: balanceAdd } 
+                );
+           
+                const userBalanceDetail = {
+                  userId: orderSaved.user._id, 
+                  value: orderSaved.commission,
+                  date: orderSaved.date,
+                  type: 'SERVICE_PERFORMED',
+                  orderId: orderSaved._id,
+                  description: order.customer.name
+                }
+                await new UserBalanceDetail(userBalanceDetail).save(); 
+          
+                console.log('Order saved success!!!');
+                return {
+                  isValid: true,
+                  status: 201,
+                  message: 'Order saved success!!!',
+                  plan: company.plan.name,
+                  order: orderSaved
+                }                   
+              }
+            } catch (error) {
+              console.error('api-error:: OrderService.save9', error);
+              return {
+                isValid: false,
+                status: 500,
+                message: error,
+                plan: null,
+                order: null
+              }                  
+            }        
+        }
+        
+    }
+}

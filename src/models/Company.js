@@ -62,6 +62,10 @@ const companySchema = new mongoose.Schema({
         default: 'PENDING',        
       }      
     },     
+    daysForBlocking: {
+      type: Number,
+      default: 3,      
+    }
   },
   planOld: {
     name: {

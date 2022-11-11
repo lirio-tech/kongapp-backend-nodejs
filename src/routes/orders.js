@@ -11,6 +11,7 @@ const companyService = require('../services/CompanyService.js').companyService()
 const orderService = require('../services/order/OrderService.js').orderService();
 const btoa = require('btoa');
 const { ObjectId } = require('mongodb');
+const saveOrderUsecase = require('../bounded-context/order/usecases/SaveOrderUsecase').saveOrderUsecase();
 //const basic_encoded = btoa(`${process.env.AUTH_USER}:${process.env.AUTH_PASS}`)
 
 router.get('/v4/summary/:dateIni/:dateEnd', authorization(), async (req, res) => {
@@ -82,6 +83,17 @@ router.get('/v2/:dateIni/:dateEnd', authorization(), async (req, res, next) => {
 router.post('/v9', authorization(), async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); 
   const result = await orderService.saveV9(req.body, req.userId, req.headers['company']);
+
+  if(result.isValid === false) {
+    res.status(result.status).json({message: result.message});    
+    return;
+  }
+  res.status(200).json(result.order);    
+});
+
+router.post('/v10', authorization(), async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); 
+  const result = await saveOrderUsecase.saveV10(req.body, req.userId, req.headers['company']);
   if(result.isValid === false) {
     res.status(result.status).json({message: result.message});    
     return;

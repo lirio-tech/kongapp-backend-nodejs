@@ -2,6 +2,8 @@ const dateUtils = require("../utils/dateUtils").dateUtils();
 
 module.exports.companyService = () => {
     return {                
+
+        // TODO Excluir está obsoleto > Movido para bounded-context/company/plan
         isNotExpiredPlan(company, dayAdded) {
             if(company.plan.name === 'Free') {
                 return true;

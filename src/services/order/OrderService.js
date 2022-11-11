@@ -195,6 +195,8 @@ module.exports.orderService = () => {
               res.status(500).send(error);
           } 
         },           
+
+        // OBSOLETO
         async saveV9(order, userId, companyId) {
           try {
             order.company = companyId;
