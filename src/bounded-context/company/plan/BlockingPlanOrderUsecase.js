@@ -1,6 +1,6 @@
 const Company = require('../../../models/Company');
 const companyService  = require('../../../services/CompanyService.js').companyService();
-const User = require('../../../models/User');
+
 
 module.exports.blockingPlanOrderUsecase = () => {
     return {
