@@ -356,7 +356,7 @@ router.post('/v2/:_id/:paymentType', authorization(), async (req, res) => {
         company: schedule.companyId,
         cardRate: req.query.cardRate ? req.query.cardRate : 0
       };
-      const orderSaved = await orderService.saveV8(order, req.userId, req.headers['company']);
+      const orderSaved = await orderService.saveV9(order, req.userId, req.headers['company']);
       console.log('orderSaved', orderSaved)
       if(orderSaved.isValid) { 
           await Schedule.updateOne(
