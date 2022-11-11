@@ -10,9 +10,9 @@ module.exports.companyFormat = () => {
                 plan: {
                     name: company.plan.name,
                     dateStarted: company.plan.dateStarted,
-                    dateStartedBR: dateFormat.dateTimeToStringPtBR(new Date(company.plan.dateStarted)),
+                    dateStartedBR: dateFormat.dateToStringPtBR(new Date(company.plan.dateStarted)),
                     dateEnd: company.plan.dateEnd,   
-                    dateEndBR: dateFormat.dateTimeToStringPtBR(new Date(company.plan.dateEnd)),
+                    dateEndBR: dateFormat.dateToStringPtBR(new Date(company.plan.dateEnd)),
                     amountUsers: company.plan.amountUsers,
                     amountUsersAdmin: company.plan.amountUsersAdmin,
                     amountUsersCommon: company.plan.amountUsersCommon,
