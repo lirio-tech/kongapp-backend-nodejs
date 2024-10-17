@@ -1,4 +1,4 @@
-const CONST_MAX_CASH = 1000;
+const CONST_MAX_CASH = 300;
 const CONST_USERS_ENABLED = 1;
 
 module.exports.planFreeService = () => {
